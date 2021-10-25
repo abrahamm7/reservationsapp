@@ -24,6 +24,8 @@ dependencies:
   shared_preferences: ^0.5.3+4
   #Local Database
   sqflite: ^2.0.0+4
+  #Path Provider
+  path_provider: ^1.6.27
 
 dev_dependencies:
   flutter_test:
