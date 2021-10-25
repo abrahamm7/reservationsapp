@@ -8,8 +8,8 @@ class MockReservationsRepository extends Mock implements ReservationRepository {
 }
 
 void main() {
-  WriteReservation usecase;
-  MockReservationsRepository mockWriteReservations;
+  late WriteReservation usecase;
+  late MockReservationsRepository mockWriteReservations;
   setUp(() {
     mockWriteReservations = MockReservationsRepository();
     usecase = WriteReservation(mockWriteReservations);
@@ -27,9 +27,6 @@ void main() {
       precipitationPercentage: precipitationPercentage);
 
   test('Test to reserve courts', () {
-    var reserveCourt = mockWriteReservations.writeReservations(
-        userName, nameCourts, dateReservation, precipitationPercentage);
-
-    expect(reserveCourt, "inserted");
+    mockWriteReservations.writeReservations(reservations);
   });
 }
