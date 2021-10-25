@@ -15,16 +15,11 @@ void main() {
     usecase = WriteReservation(mockWriteReservations);
   });
 
-  final String nameCourts = "A";
-  final String userName = "Abraham";
-  final DateTime dateReservation = DateTime.now();
-  final double precipitationPercentage = 3.5;
-
   var reservations = Reservations(
-      nameCourts: nameCourts,
-      userName: userName,
-      dateReservation: dateReservation,
-      precipitationPercentage: precipitationPercentage);
+      nameCourts: "A",
+      userName: "Abraham",
+      dateReservation: DateTime.now(),
+      precipitationPercentage: 3.5);
 
   test('Test to reserve courts', () {
     mockWriteReservations.writeReservations(reservations);
