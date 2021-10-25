@@ -3,10 +3,10 @@ import 'dart:ffi';
 import 'package:equatable/equatable.dart';
 
 class Reservations extends Equatable {
-  final String nameCourts;
-  final String userName;
-  final DateTime dateReservation;
-  final Double precipitationPercentage;
+  final String? nameCourts;
+  final String? userName;
+  final DateTime? dateReservation;
+  final double? precipitationPercentage;
 
   Reservations(
       {required this.nameCourts,
