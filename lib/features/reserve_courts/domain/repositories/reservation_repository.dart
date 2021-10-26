@@ -3,7 +3,8 @@ import 'package:reservationsapp/core/failures.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/entities/reservation.dart';
 
 abstract class ReservationRepository {
-  Future<Either<Failure, Reservations>> getReservations();
-  Future<Either<Failure, String>> writeReservations(Reservations reservations);
-  Future<Either<Failure, String>> deleteReservations();
+  Future<Either<Failure, List<Reservations>>> getReservations();
+  Future<Either<Failure, Reservations>> writeReservations(
+      Reservations reservations);
+  Future<Either<Failure, Type>> deleteReservations();
 }

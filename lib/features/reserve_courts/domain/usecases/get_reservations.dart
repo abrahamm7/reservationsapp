@@ -5,19 +5,17 @@ import 'package:reservationsapp/core/usecases/usecases.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/entities/reservation.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/repositories/reservation_repository.dart';
 
-class WriteReservation implements UseCases<Reservations, Params> {
+class GetReservations implements UseCases<List<Reservations>, NoParams> {
   final ReservationRepository reservationRepository;
 
-  WriteReservation(this.reservationRepository);
+  GetReservations(this.reservationRepository);
 
   @override
-  Future<Either<Failure, Reservations>> call(Params params) async {
-    return await reservationRepository.writeReservations(params.reservations);
+  Future<Either<Failure, List<Reservations>>> call(NoParams params) async {
+    var listReservations = await reservationRepository.getReservations();
+    if (listReservations.length() == 0) {
+      NullThrownError();
+    }
+    return await reservationRepository.getReservations();
   }
-}
-
-class Params extends Equatable {
-  final Reservations reservations;
-
-  Params({required this.reservations}) : super([reservations]);
 }
