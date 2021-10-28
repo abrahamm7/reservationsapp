@@ -11,8 +11,8 @@ class WriteReservation implements UseCases<Reservations, Params> {
   WriteReservation(this.reservationRepository);
 
   @override
-  Future<Either<Failure, Reservations>> call(Params params) async {
-    return await reservationRepository.writeReservations(params.reservations);
+  Future<void> call(Params params) async {
+    await reservationRepository.writeReservations(params.reservations);
   }
 }
 
