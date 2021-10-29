@@ -5,5 +5,5 @@ import 'package:reservationsapp/features/reserve_courts/domain/entities/reservat
 abstract class ReservationRepository {
   Future<Either<Failure, List<Reservations>>> getReservations();
   Future<Either<Failure, int>> writeReservations(Reservations reservations);
-  Future<void> deleteReservations();
+  Future<Either<Failure, int>> deleteReservations(int id);
 }

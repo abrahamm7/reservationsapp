@@ -10,13 +10,20 @@ class ReservationRepositoryImpl implements ReservationRepository {
   ReservationRepositoryImpl({required this.reservationLocalDataSource});
 
   @override
-  Future<Either<Failure, Type>> deleteReservations() {
-    // TODO: implement deleteReservations
-    throw UnimplementedError();
-  }
+  Future<Either<Failure, int>> deleteReservations(int id) async =>
+      await deleteReservationsFromDatabase(id);
 
   @override
-  Future<Either<Failure, List<Reservations>>> getReservations() async {
+  Future<Either<Failure, List<Reservations>>> getReservations() async =>
+      await getReservationsFromDatabase();
+
+  @override
+  Future<Either<Failure, int>> writeReservations(
+          Reservations reservations) async =>
+      await insertReservationsIntoDatabase(reservations);
+
+  Future<Either<Failure, List<Reservations>>>
+      getReservationsFromDatabase() async {
     try {
       return Right(await reservationLocalDataSource.getReservations());
     } on CacheExeptions {
@@ -24,12 +31,19 @@ class ReservationRepositoryImpl implements ReservationRepository {
     }
   }
 
-  @override
-  Future<Either<Failure, int>> writeReservations(
+  Future<Either<Failure, int>> insertReservationsIntoDatabase(
       Reservations reservations) async {
     try {
       return Right(
           await reservationLocalDataSource.writeReservations(reservations));
+    } on CacheExeptions {
+      return Left(CacheExeptions());
+    }
+  }
+
+  Future<Either<Failure, int>> deleteReservationsFromDatabase(int id) async {
+    try {
+      return Right(await reservationLocalDataSource.deleteReservations(id));
     } on CacheExeptions {
       return Left(CacheExeptions());
     }
