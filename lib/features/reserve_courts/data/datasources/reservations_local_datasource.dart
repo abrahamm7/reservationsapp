@@ -3,9 +3,8 @@ import 'package:reservationsapp/features/reserve_courts/domain/entities/reservat
 import 'package:sqflite/sqflite.dart';
 
 abstract class ReservationLocalDataSource {
-  Future<ReservationModel> getReservations();
+  Future<List<ReservationModel>> getReservations();
   Future<int> writeReservations(Reservations reservationModel);
-  //Future<ReservationModel> getReservations();
 }
 
 class ReservationLocalDataSourceImpl implements ReservationLocalDataSource {
@@ -15,20 +14,28 @@ class ReservationLocalDataSourceImpl implements ReservationLocalDataSource {
   ReservationLocalDataSourceImpl({required this.database});
 
   @override
-  Future<ReservationModel> getReservations() {
-    // TODO: implement getReservations
-    throw UnimplementedError();
+  Future<List<ReservationModel>> getReservations() async {
+    List<Map<String, dynamic>> maps = await database.query(tblName);
+    if (maps.isNotEmpty) {
+      return maps.map((map) => ReservationModel.fromDbMap(map)).toList();
+    } else {
+      return throw Exception();
+    }
   }
 
   @override
-  Future<int> writeReservations(Reservation reservationModel) {
-    // TODO: implement writeReservations
-    Database db = database;
+  Future<int> writeReservations(Reservations reservations) {
+    var value = {
+      'nameCourts': reservations.nameCourts,
+      'userName': reservations.userName,
+      'dateReservation': reservations.dateReservation,
+      'precipitationPercentage': reservations.precipitationPercentage
+    };
+
     return database.insert(
       tblName,
-      reservationModel.toDbMap(),
+      value,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
-    throw UnimplementedError();
   }
 }

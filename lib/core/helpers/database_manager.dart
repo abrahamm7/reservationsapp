@@ -37,7 +37,7 @@ class DatabaseManager {
             ID INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
             nameCourts TEXT NOT NULL,
             userName TEXT,
-            dateReservation DATETIME,
+            dateReservation TEXT,
             precipitationPercentage DOUBLE
           )
           ''');

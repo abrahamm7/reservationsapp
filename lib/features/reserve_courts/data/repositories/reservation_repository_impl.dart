@@ -16,13 +16,22 @@ class ReservationRepositoryImpl implements ReservationRepository {
   }
 
   @override
-  Future<Either<Failure, List<Reservations>>> getReservations() {
-    // TODO: implement getReservations
-    throw UnimplementedError();
+  Future<Either<Failure, List<Reservations>>> getReservations() async {
+    try {
+      return Right(await reservationLocalDataSource.getReservations());
+    } on CacheExeptions {
+      return Left(CacheExeptions());
+    }
   }
 
   @override
-  Future<int> writeReservations(Reservations reservations) async {
-    return await reservationLocalDataSource.writeReservations(reservations);
+  Future<Either<Failure, int>> writeReservations(
+      Reservations reservations) async {
+    try {
+      return Right(
+          await reservationLocalDataSource.writeReservations(reservations));
+    } on CacheExeptions {
+      return Left(CacheExeptions());
+    }
   }
 }

@@ -1,17 +1,33 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:reservationsapp/features/reserve_courts/data/datasources/reservations_local_datasource.dart';
+import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sqflite/sqflite.dart';
 
-class MockSharedPreferences extends Mock implements SharedPreferences {}
+class MockDatabase extends Mock implements Database {}
 
 void main() {
-  late MockSharedPreferences mockSharedPreferences;
+  late MockDatabase mockDatabase;
   late ReservationLocalDataSourceImpl datasource;
 
   setUp(() {
-    mockSharedPreferences = MockSharedPreferences();
-    //datasource = ReservationLocalDataSourceImpl(
-    //sharedPreferences: mockSharedPreferences);
+    mockDatabase = MockDatabase();
+    datasource = ReservationLocalDataSourceImpl(database: mockDatabase);
+  });
+
+  var reservationsModel = ReservationModel(
+      id: 1,
+      nameCourts: "A",
+      userName: "Abraham",
+      dateReservation: DateTime.now(),
+      precipitationPercentage: 3.5);
+
+  test('Insert into database', () async {
+    await datasource.writeReservations(reservationsModel);
+  });
+
+  test('Fetch data from database', () async {
+    await datasource.getReservations();
   });
 }
