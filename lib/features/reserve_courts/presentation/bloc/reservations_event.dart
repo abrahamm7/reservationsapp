@@ -10,11 +10,15 @@ abstract class ReservationsEvent extends Equatable {
 class CreateReservation extends ReservationsEvent {
   final ReservationModel reservationModel;
 
-  CreateReservation(this.reservationModel);
+  CreateReservation({required this.reservationModel});
 }
 
 class DeleteReservation extends ReservationsEvent {}
 
-class GetReservations extends ReservationsEvent {}
+class GetReservations extends ReservationsEvent {
+  final List<ReservationModel> reservationsList;
+
+  GetReservations({required this.reservationsList});
+}
 
 class ShowModalAlert extends ReservationsEvent {}

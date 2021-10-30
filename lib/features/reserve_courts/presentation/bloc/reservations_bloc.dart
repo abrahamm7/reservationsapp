@@ -1,9 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
+import 'package:reservationsapp/features/reserve_courts/domain/usecases/write_reservation.dart';
 
 part 'reservations_event.dart';
 part 'reservations_state.dart';
+
+const String EMPTY_LIST = 'There are nothing to show';
 
 class ReservationsBloc extends Bloc<ReservationsEvent, ReservationsState> {
   final CreateReservation createReservation;
@@ -25,11 +28,13 @@ class ReservationsBloc extends Bloc<ReservationsEvent, ReservationsState> {
 
   @override
   // TODO: implement initialState
-  ReservationsState get initialState => throw UnimplementedError();
+  ReservationsState get initialState => Empty();
 
   @override
-  Stream<ReservationsState> mapEventToState(ReservationsEvent event) {
-    // TODO: implement mapEventToState
-    throw UnimplementedError();
+  Stream<ReservationsState> mapEventToState(ReservationsEvent event) async* {
+    List<ReservationModel> reservationsList;
+    if (event is GetReservations) {
+      //reservationsList
+    }
   }
 }
