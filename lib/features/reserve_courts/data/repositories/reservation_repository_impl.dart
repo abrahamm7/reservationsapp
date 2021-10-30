@@ -1,6 +1,6 @@
 import 'package:reservationsapp/features/reserve_courts/data/datasources/reservations_local_datasource.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/entities/reservation.dart';
-import 'package:reservationsapp/core/failures.dart';
+import 'package:reservationsapp/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/repositories/reservation_repository.dart';
 

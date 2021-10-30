@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:reservationsapp/core/failures.dart';
+import 'package:reservationsapp/core/errors/failures.dart';
 import 'package:reservationsapp/core/usecases/usecases.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/entities/reservation.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/repositories/reservation_repository.dart';

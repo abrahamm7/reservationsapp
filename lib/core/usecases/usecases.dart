@@ -1,4 +1,4 @@
-import 'package:reservationsapp/core/failures.dart';
+import 'package:reservationsapp/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 
