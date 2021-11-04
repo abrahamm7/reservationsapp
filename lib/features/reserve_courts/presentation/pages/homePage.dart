@@ -15,14 +15,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  Database database = openDatabase(path);
   List<ReservationModel> list_reservations = [];
 
   @override
   void initState() async {
     super.initState();
-    var reservationLocalDataSource =
-        ReservationLocalDataSourceImpl(database: database);
+    var reservationLocalDataSource = ReservationLocalDataSourceImpl;
     list_reservations = await reservationLocalDataSource.getReservations();
   }
 

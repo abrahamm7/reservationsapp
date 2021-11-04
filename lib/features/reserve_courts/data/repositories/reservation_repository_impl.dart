@@ -10,7 +10,7 @@ class ReservationRepositoryImpl implements ReservationRepository {
   ReservationRepositoryImpl({required this.reservationLocalDataSource});
 
   @override
-  Future<Either<Failure, int>> deleteReservations(int id) async =>
+  Future<Either<Failure, void>> deleteReservations(int id) async =>
       await deleteReservationsFromDatabase(id);
 
   @override
@@ -18,7 +18,7 @@ class ReservationRepositoryImpl implements ReservationRepository {
       await getReservationsFromDatabase();
 
   @override
-  Future<Either<Failure, int>> writeReservations(
+  Future<Either<Failure, void>> writeReservations(
           Reservations reservations) async =>
       await insertReservationsIntoDatabase(reservations);
 
@@ -31,7 +31,7 @@ class ReservationRepositoryImpl implements ReservationRepository {
     }
   }
 
-  Future<Either<Failure, int>> insertReservationsIntoDatabase(
+  Future<Either<Failure, void>> insertReservationsIntoDatabase(
       Reservations reservations) async {
     try {
       return Right(
@@ -41,7 +41,7 @@ class ReservationRepositoryImpl implements ReservationRepository {
     }
   }
 
-  Future<Either<Failure, int>> deleteReservationsFromDatabase(int id) async {
+  Future<Either<Failure, void>> deleteReservationsFromDatabase(int id) async {
     try {
       return Right(await reservationLocalDataSource.deleteReservations(id));
     } on CacheExeptions {
