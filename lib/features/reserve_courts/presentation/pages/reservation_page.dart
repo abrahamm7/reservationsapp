@@ -21,14 +21,16 @@ class _ReservationPageState extends State<ReservationPage> {
           padding: EdgeInsets.all(30),
           child: ListView(children: <Widget>[
             Text('Cancha a reservar'),
-            DropdownButton(
+            DropdownButton<String>(
+              hint: Text('Seleccione una cancha'),
               items: <String>['Cancha A', 'Cancha B', 'Cancha C']
-                  .map<DropdownMenuItem<String>>((String value) {
+                  .map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
                 );
               }).toList(),
+              onChanged: (_) {},
             ),
             SizedBox(),
             Text('Fecha de reservación'),
