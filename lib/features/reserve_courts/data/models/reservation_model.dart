@@ -12,14 +12,26 @@ class ReservationModel extends Reservations {
       required final DateTime? dateReservation,
       required final double? precipitationPercentage})
       : super(
+            id: id,
             nameCourts: nameCourts,
             userName: userName,
             dateReservation: dateReservation,
             precipitationPercentage: precipitationPercentage);
 
   late SharedPreferences preferences;
+  List<ReservationModel> reservationsList = [];
 
-  void insertPreferences() async {
+  void initialPreferences() async {
     preferences = await SharedPreferences.getInstance();
+  }
+
+  void createReservations(ReservationModel reservationModel) {
+    var reservations = ReservationModel(
+        id: reservationModel.id,
+        nameCourts: reservationModel.nameCourts,
+        userName: reservationModel.userName,
+        dateReservation: reservationModel.dateReservation,
+        precipitationPercentage: reservationModel.precipitationPercentage);
+    reservationsList.add(reservations);
   }
 }
