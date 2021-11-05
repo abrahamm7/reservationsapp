@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:reservationsapp/core/helpers/database_manager.dart';
 import 'package:reservationsapp/features/reserve_courts/data/datasources/reservations_local_datasource.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:reservationsapp/features/reserve_courts/data/repositories/reservation_repository_impl.dart';
@@ -21,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   void initState() async {
     super.initState();
     var reservationLocalDataSource = ReservationLocalDataSourceImpl;
-    list_reservations = await reservationLocalDataSource.getReservations();
+    //list_reservations = await reservationLocalDataSource.getReservations();
   }
 
   @override
