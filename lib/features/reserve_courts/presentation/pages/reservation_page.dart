@@ -58,9 +58,18 @@ class _ReservationPageState extends State<ReservationPage> {
               decoration: InputDecoration(hintText: 'Jhon Doe'),
             ),
             ElevatedButton(
-              child: Text('Reservar'),
-              onPressed: () {},
-            )
+                child: Text('Reservar'),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Fluttertoast.showToast(
+                      msg: "Cancha reservada: $valueSelected",
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0);
+                })
           ]),
         ),
       ),
