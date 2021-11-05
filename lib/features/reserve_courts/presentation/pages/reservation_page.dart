@@ -11,7 +11,7 @@ class ReservationPage extends StatefulWidget {
 }
 
 class _ReservationPageState extends State<ReservationPage> {
-  var valueSelected = null;
+  var valueSelected;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
