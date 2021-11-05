@@ -37,7 +37,7 @@ class _ReservationPageState extends State<ReservationPage> {
                   valueSelected = newValue;
                 });
                 Fluttertoast.showToast(
-                    msg: "Ha seleccionado la ${valueSelected}",
+                    msg: "Ha seleccionado la $valueSelected",
                     toastLength: Toast.LENGTH_SHORT,
                     gravity: ToastGravity.BOTTOM,
                     timeInSecForIosWeb: 1,
