@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class ReservationPage extends StatefulWidget {
   ReservationPage({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class ReservationPage extends StatefulWidget {
 }
 
 class _ReservationPageState extends State<ReservationPage> {
+  var valueSelected = null;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +32,19 @@ class _ReservationPageState extends State<ReservationPage> {
                   child: Text(value),
                 );
               }).toList(),
-              onChanged: (_) {},
+              onChanged: (newValue) {
+                setState(() {
+                  valueSelected = newValue;
+                });
+                Fluttertoast.showToast(
+                    msg: "Ha seleccionado la ${valueSelected}",
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    timeInSecForIosWeb: 1,
+                    backgroundColor: Colors.red,
+                    textColor: Colors.white,
+                    fontSize: 16.0);
+              },
             ),
             SizedBox(),
             Text('Fecha de reservación'),
