@@ -13,7 +13,8 @@ class ReservationPage extends StatefulWidget {
 class _ReservationPageState extends State<ReservationPage> {
   var courtSelected;
   var currentDateTime = DateTime.now();
-  final userName = TextEditingController();
+  String result = "";
+  final userName = new TextEditingController();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? pickedDate = await showDatePicker(
@@ -74,24 +75,39 @@ class _ReservationPageState extends State<ReservationPage> {
                       }),
                   SizedBox(),
                   Text('A nombre de'),
-                  TextFormField(
+                  TextField(
                     decoration: InputDecoration(hintText: 'Jhon Doe'),
                     controller: userName,
                   ),
                   ElevatedButton(
                       child: Text('Reservar'),
-                      onPressed: () {
-                        ReservationProvider().createReservation(userName.text,
-                            1, courtSelected, currentDateTime, 3.5);
-                        Navigator.pop(context);
-                        Fluttertoast.showToast(
-                            msg: "Cancha reservada: $courtSelected",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16.0);
+                      onPressed: () async {
+                        result = await ReservationProvider().createReservation(
+                            userName.text,
+                            1,
+                            courtSelected,
+                            currentDateTime,
+                            3.5);
+                        if (result.contains('Existen campos vacios')) {
+                          Fluttertoast.showToast(
+                              msg: result,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: result,
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                          Navigator.pop(context);
+                        }
                       }),
                 ]),
               ),
