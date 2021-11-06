@@ -7,7 +7,7 @@ import 'package:sqflite/sqflite.dart';
 
 abstract class ReservationLocalDataSource {
   Future<List<ReservationModel>> getReservations();
-  Future<void> writeReservations(Reservations reservationModel);
+  Future<void> writeReservations(ReservationModel reservationModel);
   Future<void> deleteReservations(int id);
 }
 
@@ -17,7 +17,7 @@ class ReservationLocalDataSourceImpl implements ReservationLocalDataSource {
       await getReservationsFromLocalStorage();
 
   @override
-  Future<void> writeReservations(Reservations reservations) async =>
+  Future<void> writeReservations(ReservationModel reservations) async =>
       await insertReservationsIntoLocalStorage(reservations);
 
   @override

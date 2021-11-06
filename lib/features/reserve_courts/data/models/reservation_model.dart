@@ -7,15 +7,20 @@ import 'package:shared_preferences/shared_preferences.dart';
 @JsonSerializable()
 class ReservationModel extends Reservations {
   ReservationModel(
-      {required final int id,
-      required final String? nameCourts,
+      {required final String? nameCourts,
       required final String? userName,
-      required final DateTime? dateReservation,
+      required final String? dateReservation,
       required final double? precipitationPercentage})
       : super(
-            id: id,
             nameCourts: nameCourts,
             userName: userName,
             dateReservation: dateReservation,
             precipitationPercentage: precipitationPercentage);
+
+  Map<String, dynamic> toJson() => {
+        'userName': userName,
+        'nameCourts': nameCourts,
+        'dateReservation': dateReservation,
+        'precipitationPercentage': precipitationPercentage,
+      };
 }
