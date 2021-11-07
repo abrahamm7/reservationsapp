@@ -16,14 +16,13 @@ void main() {
     usecase = WriteReservation(mockWriteReservations);
   });
 
-  reservations = Reservations(
-      id: 1,
+  final reservation = Reservations(
       nameCourts: "A",
       userName: "Abraham",
-      dateReservation: DateTime.now(),
+      dateReservation: "${DateTime.now().hour}",
       precipitationPercentage: 3.5);
 
   test('Test to reserve courts', () async {
-    await usecase(Params(reservations: reservations));
+    await usecase(Params(reservations: reservation));
   });
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reservationsapp/core/providers/reservation_provider.dart';
 import 'package:reservationsapp/features/reserve_courts/data/datasources/reservations_local_datasource.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:reservationsapp/features/reserve_courts/data/repositories/reservation_repository_impl.dart';
@@ -16,6 +17,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<ReservationModel> list_reservations = [];
+  final ReservationProvider reservationProvider = ReservationProvider();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getListReservations();
+  }
+
+  void _getListReservations() async {
+    list_reservations = await reservationProvider.getReservations();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,23 +48,24 @@ class _HomePageState extends State<HomePage> {
             backgroundColor: Colors.green),
         body: ListView(
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(5),
-              child: Card(
-                child: Container(
-                  child: Padding(
-                    padding: EdgeInsets.all(15),
-                    child: Column(
-                      children: <Widget>[
-                        Text('Nombre: Cancha A'),
-                        Text('Reservada para: 1/1/2022'),
-                        Text('Reservada por: Abraham Morillo')
-                      ],
+            for (var item in list_reservations)
+              Padding(
+                padding: EdgeInsets.all(5),
+                child: Card(
+                  child: Container(
+                    child: Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Column(
+                        children: <Widget>[
+                          Text('Nombre: ${item.nameCourts}'),
+                          Text('Reservada para: ${item.dateReservation}'),
+                          Text('Reservada por: ${item.userName}'),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
           ],
         ));
   }

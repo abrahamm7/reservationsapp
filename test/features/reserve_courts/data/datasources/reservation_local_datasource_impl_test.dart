@@ -16,10 +16,9 @@ void main() {
   });
 
   var reservationsModel = ReservationModel(
-      id: 1,
       nameCourts: "A",
       userName: "Abraham",
-      dateReservation: DateTime.now(),
+      dateReservation: "${DateTime.now().hour}",
       precipitationPercentage: 3.5);
 
   test('Insert into database', () async {

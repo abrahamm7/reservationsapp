@@ -4,10 +4,9 @@ import 'package:reservationsapp/features/reserve_courts/domain/entities/reservat
 
 void main() {
   final reservation = ReservationModel(
-      id: 1,
-      nameCourts: 'A',
-      userName: 'Abraham',
-      dateReservation: DateTime.now(),
+      nameCourts: "A",
+      userName: "Abraham",
+      dateReservation: "${DateTime.now().hour}",
       precipitationPercentage: 3.5);
   test('Test subclass reservation model', () {
     expect(reservation, isA<Reservations>());
