@@ -6,7 +6,7 @@ void main() {
   final reservation = ReservationModel(
       nameCourts: "A",
       userName: "Abraham",
-      dateReservation: "${DateTime.now().hour}",
+      dateReservation: DateTime.now().toIso8601String(),
       precipitationPercentage: "3.5");
   test('Test subclass reservation model', () {
     expect(reservation, isA<Reservations>());

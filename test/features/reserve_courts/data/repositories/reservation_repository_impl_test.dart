@@ -23,12 +23,18 @@ void main() {
   var reservationsModel = ReservationModel(
       nameCourts: "A",
       userName: "Abraham",
-      dateReservation: "${DateTime.now().hour}",
+      dateReservation: DateTime.now().toIso8601String(),
       precipitationPercentage: "3.5");
 
   final Reservations reservations = reservationsModel;
 
-  test('Write a reservation by user', () async {
-    await reservationRepositoryImpl.writeReservations(reservations);
+  group('Test some operations from DataBase', () {
+    test('Write a reservation by user', () async {
+      await reservationRepositoryImpl.writeReservations(reservations);
+    });
+    test('Get a list reservations by user', () async {
+      var reservationList = await reservationRepositoryImpl.getReservations();
+      expect(reservationList, isNotNull);
+    });
   });
 }
