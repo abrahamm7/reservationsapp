@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:reservationsapp/core/helpers/database_manager.dart';
 import 'package:reservationsapp/features/reserve_courts/data/datasources/reservations_local_datasource.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/entities/reservation.dart';
@@ -19,8 +21,10 @@ class ReservationProvider extends ReservationLocalDataSourceImpl
 
   ReservationProvider();
 
+  get db => null;
+
   void createReservation(String username, String courtName, DateTime dateTime,
-      double precipitation) {
+      String precipitation) {
     var reservation = ReservationModel(
         nameCourts: courtName,
         userName: username,
@@ -37,37 +41,16 @@ class ReservationProvider extends ReservationLocalDataSourceImpl
 
   @override
   Future<List<ReservationModel>> getReservations() async {
-    // TODO: implement getReservations
-    // Database db = database;
-    // List<Map<String, dynamic>> maps = await db.query('Reservation_Tbl');
-    // if (maps.isNotEmpty) {
-    //   listReservations =
-    //       maps.map((map) => ReservationModel.fromDbMap(map)).toList();
-    //   return listReservations;
-    // } else {
-    //   return listReservations;
-    // }
-
     List<ReservationModel> listReservations = [];
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    var reservation = jsonDecode(preferences.getString('reservation'));
-    var reservationParsed = ReservationModel.fromJson(reservation);
-    listReservations.add(reservationParsed);
+    var dbHelper = DBHelper();
+    listReservations = await dbHelper.getReservations();
 
     return listReservations;
   }
 
   @override
   Future<void> writeReservations(ReservationModel reservationModel) async {
-    // TODO: implement writeReservations
-    // Database db = database;
-    // db.insert(
-    //   tblName,
-    //   reservationModel.toDbMap(),
-    //   conflictAlgorithm: ConflictAlgorithm.replace,
-    // );
-    var objectToJson = reservationModel.toJson();
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    preferences.setString('reservation', jsonEncode(objectToJson));
+    var dbHelper = DBHelper();
+    dbHelper.saveReservations(reservationModel);
   }
 }

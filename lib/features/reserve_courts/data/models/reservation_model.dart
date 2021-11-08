@@ -11,7 +11,7 @@ class ReservationModel extends Reservations {
       {required final String? nameCourts,
       required final String? userName,
       required final String? dateReservation,
-      required final double? precipitationPercentage})
+      required final String? precipitationPercentage})
       : super(
             nameCourts: nameCourts,
             userName: userName,
@@ -24,7 +24,8 @@ class ReservationModel extends Reservations {
         nameCourts: parsedJson['nameCourts'].toString(),
         userName: parsedJson['userName'].toString(),
         dateReservation: parsedJson['dateReservation'].toString(),
-        precipitationPercentage: parsedJson['precipitationPercentage']);
+        precipitationPercentage:
+            parsedJson['precipitationPercentage'].toString());
   }
 
   Map<String, dynamic> toJson() => {
@@ -47,7 +48,6 @@ class ReservationModel extends Reservations {
 
   Map<String, dynamic> toDbMap() {
     return {
-      'id': id,
       'nameCourts': nameCourts,
       'userName': userName,
       'dateReservation': dateReservation,

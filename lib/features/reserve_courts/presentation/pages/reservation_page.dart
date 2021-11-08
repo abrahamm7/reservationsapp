@@ -97,7 +97,7 @@ class _ReservationPageState extends State<ReservationPage> {
                             userNameEditingController,
                             courtSelected,
                             currentDateTime,
-                            2.0);
+                            '2.0');
                         Navigator.pop(context);
                       }),
                 ]),

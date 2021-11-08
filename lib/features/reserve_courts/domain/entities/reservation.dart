@@ -6,7 +6,7 @@ class Reservations extends Equatable {
   late final String? nameCourts;
   final String? userName;
   final String? dateReservation;
-  final double? precipitationPercentage;
+  final String? precipitationPercentage;
 
   Reservations(
       {required this.nameCourts,
