@@ -17,7 +17,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<ReservationModel> list_reservations = [];
-  final ReservationProvider reservationProvider = ReservationProvider();
+  final ReservationLocalDataSourceImpl reservationLocalDataSourceImpl =
+      ReservationLocalDataSourceImpl();
 
   @override
   void initState() {
@@ -27,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _getListReservations() async {
-    list_reservations = await reservationProvider.getReservations();
+    list_reservations = await reservationLocalDataSourceImpl.getReservations();
     setState(() {});
   }
 

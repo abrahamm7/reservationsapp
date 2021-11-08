@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:reservationsapp/core/helpers/database_manager.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/entities/reservation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,16 +26,28 @@ class ReservationLocalDataSourceImpl implements ReservationLocalDataSource {
       await deleteReservationsFromLocalStorage(id);
 
   Future<List<ReservationModel>> getReservationsFromLocalStorage() async {
-    final SharedPreferences preferences;
-    late List<ReservationModel> reservationsList = [];
+    Database? _db;
+    _db = await DBHelper().initDb();
+    var dbClient = await _db;
+    var list = await dbClient?.query('Reservations');
+    List<ReservationModel> reservationsList = [];
+
+    list?.forEach((result) {
+      ReservationModel reservations = ReservationModel.fromDbMap(result);
+      reservationsList.add(reservations);
+    });
+    print(reservationsList.length);
     return reservationsList;
-    // if (preferences.containsKey("reservations") != null &&
-    //     preferences.get("reservations") != null) {
-    //   return reservationsList = jsonDecode(preferences.get("reservation"));
   }
 }
 
 Future<void> insertReservationsIntoLocalStorage(
-    Reservations reservations) async {}
+    Reservations reservations) async {
+  Database? _db;
+  _db = await DBHelper().initDb();
+  var dbClient = await _db;
+  var reservationModel = reservations as ReservationModel;
+  await dbClient?.insert("Reservations", reservationModel.toDbMap());
+}
 
 Future<void> deleteReservationsFromLocalStorage(int id) async {}

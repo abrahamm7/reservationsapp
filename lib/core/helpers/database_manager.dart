@@ -27,22 +27,4 @@ class DBHelper {
         "CREATE TABLE Reservations(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nameCourts TEXT, userName TEXT, dateReservation TEXT, precipitationPercentage TEXT )");
     print("Created tables");
   }
-
-  void saveReservations(ReservationModel reservationModel) async {
-    var dbClient = await db;
-    await dbClient?.insert("Reservations", reservationModel.toDbMap());
-  }
-
-  Future<List<ReservationModel>> getReservations() async {
-    var dbClient = await db;
-    var list = await dbClient?.query('Reservations');
-    List<ReservationModel> reservationsList = [];
-
-    list?.forEach((result) {
-      ReservationModel reservations = ReservationModel.fromDbMap(result);
-      reservationsList.add(reservations);
-    });
-    print(reservationsList.length);
-    return reservationsList;
-  }
 }

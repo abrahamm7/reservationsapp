@@ -9,19 +9,14 @@ import 'package:reservationsapp/features/reserve_courts/domain/entities/reservat
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
-class ReservationProvider extends ReservationLocalDataSourceImpl
-    with ChangeNotifier {
+class ReservationProvider with ChangeNotifier {
   late String _userName = "";
   late String _courtName = "";
   late DateTime _reservationDate = DateTime.now();
   late double _precipitationRate = 0;
   late double _id = 0;
-  final String tblName = "Reservation_Tbl";
-  // late Database database = openDatabase(Path());
 
   ReservationProvider();
-
-  get db => null;
 
   void createReservation(String username, String courtName, DateTime dateTime,
       String precipitation) {
@@ -34,23 +29,30 @@ class ReservationProvider extends ReservationLocalDataSourceImpl
     notifyListeners();
   }
 
-  @override
-  Future<void> deleteReservations(int id) async {
-    // TODO: implement deleteReservations
-  }
-
-  @override
   Future<List<ReservationModel>> getReservations() async {
-    List<ReservationModel> listReservations = [];
-    var dbHelper = DBHelper();
-    listReservations = await dbHelper.getReservations();
-
-    return listReservations;
+    ReservationLocalDataSourceImpl reservationLocalDataSourceImpl =
+        ReservationLocalDataSourceImpl();
+    return await reservationLocalDataSourceImpl.getReservations();
   }
 
-  @override
   Future<void> writeReservations(ReservationModel reservationModel) async {
-    var dbHelper = DBHelper();
-    dbHelper.saveReservations(reservationModel);
+    ReservationLocalDataSourceImpl reservationLocalDataSourceImpl =
+        ReservationLocalDataSourceImpl();
+    reservationLocalDataSourceImpl.writeReservations(reservationModel);
   }
+
+  // @override
+  // Future<List<ReservationModel>> getReservations() async {
+  //   List<ReservationModel> listReservations = [];
+  //   var dbHelper = DBHelper();
+  //   listReservations = await dbHelper.getReservations();
+
+  //   return listReservations;
+  // }
+
+  // @override
+  // Future<void> writeReservations(ReservationModel reservationModel) async {
+  //   var dbHelper = DBHelper();
+  //   dbHelper.saveReservations(reservationModel);
+  // }
 }

@@ -24,7 +24,7 @@ void main() {
       nameCourts: "A",
       userName: "Abraham",
       dateReservation: "${DateTime.now().hour}",
-      precipitationPercentage: 3.5);
+      precipitationPercentage: "3.5");
 
   final Reservations reservations = reservationsModel;
 
