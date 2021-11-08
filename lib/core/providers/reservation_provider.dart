@@ -10,12 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 class ReservationProvider with ChangeNotifier {
-  late String _userName = "";
-  late String _courtName = "";
-  late DateTime _reservationDate = DateTime.now();
-  late double _precipitationRate = 0;
-  late double _id = 0;
-
   ReservationProvider();
 
   void createReservation(String username, String courtName, DateTime dateTime,
