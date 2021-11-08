@@ -8,7 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 @JsonSerializable()
 class ReservationModel extends Reservations {
   ReservationModel(
-      {required final String? nameCourts,
+      {int? id,
+      required final String? nameCourts,
       required final String? userName,
       required final String? dateReservation,
       required final String? precipitationPercentage})
@@ -38,7 +39,7 @@ class ReservationModel extends Reservations {
 
   factory ReservationModel.fromDbMap(Map<String, dynamic> map) {
     return ReservationModel(
-      //id: map["id"],
+      id: map["id"],
       nameCourts: map["nameCourts"],
       userName: map["userName"],
       dateReservation: map["dateReservation"],

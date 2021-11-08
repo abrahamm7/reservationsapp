@@ -34,7 +34,11 @@ void main() {
     });
     test('Get a list reservations by user', () async {
       var reservationList = await reservationRepositoryImpl.getReservations();
-      expect(reservationList, isNotNull);
+      expect(Right(reservationList), isNotNull);
+    });
+    test('Delete a reservation by user passing id', () async {
+      var reservationList =
+          await reservationRepositoryImpl.deleteReservations(1);
     });
   });
 }

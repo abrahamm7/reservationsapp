@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reservationsapp/core/providers/reservation_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:reservationsapp/features/reserve_courts/presentation/pages/homePage.dart';
 
 class ReservationPage extends StatefulWidget {
   ReservationPage({Key? key}) : super(key: key);
@@ -98,7 +99,10 @@ class _ReservationPageState extends State<ReservationPage> {
                             courtSelected,
                             currentDateTime,
                             '2.0');
-                        Navigator.pop(context);
+                        await Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomePage()));
                       }),
                 ]),
               ),

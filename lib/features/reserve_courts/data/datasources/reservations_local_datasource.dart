@@ -50,4 +50,9 @@ Future<void> insertReservationsIntoLocalStorage(
   await dbClient?.insert("Reservations", reservationModel.toDbMap());
 }
 
-Future<void> deleteReservationsFromLocalStorage(int id) async {}
+Future<void> deleteReservationsFromLocalStorage(int id) async {
+  Database? _db;
+  _db = await DBHelper().initDb();
+  var dbClient = await _db;
+  dbClient?.rawDelete("'DELETE FROM Reservations WHERE  = $id'");
+}
