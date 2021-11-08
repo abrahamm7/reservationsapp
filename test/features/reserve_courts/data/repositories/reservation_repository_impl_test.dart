@@ -34,7 +34,7 @@ void main() {
     });
     test('Get a list reservations by user', () async {
       var reservationList = await reservationRepositoryImpl.getReservations();
-      expect(Right(reservationList), isNotNull);
+      expect(right(reservationList), isNotNull);
     });
     test('Delete a reservation by user passing id', () async {
       var reservationList =

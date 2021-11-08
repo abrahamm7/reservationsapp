@@ -21,7 +21,7 @@ void main() {
   var reservationsModel = ReservationModel(
       nameCourts: "Cancha A",
       userName: "Abraham Morillo",
-      dateReservation: "${DateTime.now().toIso8601String()}",
+      dateReservation: DateTime.now().toIso8601String(),
       precipitationPercentage: "3.5 %");
 
   group('Test some operations from DataBase', () {
