@@ -40,19 +40,4 @@ class ReservationProvider with ChangeNotifier {
         ReservationLocalDataSourceImpl();
     reservationLocalDataSourceImpl.writeReservations(reservationModel);
   }
-
-  // @override
-  // Future<List<ReservationModel>> getReservations() async {
-  //   List<ReservationModel> listReservations = [];
-  //   var dbHelper = DBHelper();
-  //   listReservations = await dbHelper.getReservations();
-
-  //   return listReservations;
-  // }
-
-  // @override
-  // Future<void> writeReservations(ReservationModel reservationModel) async {
-  //   var dbHelper = DBHelper();
-  //   dbHelper.saveReservations(reservationModel);
-  // }
 }
