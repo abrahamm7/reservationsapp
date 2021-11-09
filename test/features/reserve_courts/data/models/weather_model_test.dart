@@ -3,8 +3,6 @@ import 'package:reservationsapp/features/reserve_courts/data/models/reservation_
 import 'package:reservationsapp/features/reserve_courts/domain/entities/reservation.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/entities/weather.dart';
 
-class MockWeatherModel {}
-
 void main() {
   late Location location = Location(
       name: 'santo domingo',
