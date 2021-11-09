@@ -68,14 +68,18 @@ class _ReservationPageState extends State<ReservationPage> {
                           fontSize: 16.0);
                     },
                   ),
-                  SizedBox(),
+                  SizedBox(
+                    height: 50,
+                  ),
                   Text('Fecha de reservación'),
                   ElevatedButton(
                       child: Text('Elegir fecha'),
                       onPressed: () {
                         _selectDate(context);
                       }),
-                  SizedBox(),
+                  SizedBox(
+                    height: 50,
+                  ),
                   Text('A nombre de'),
                   TextFormField(
                     decoration: InputDecoration(hintText: 'Jhon Doe'),
