@@ -29,6 +29,7 @@ dependencies:
   json_annotation: ^4.3.0
   # toast
   fluttertoast: ^8.0.8
+  lottie: ^1.2.1
 
 dev_dependencies:
   flutter_test:

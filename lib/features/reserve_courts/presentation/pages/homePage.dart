@@ -7,6 +7,7 @@ import 'package:reservationsapp/features/reserve_courts/domain/repositories/rese
 import 'package:reservationsapp/features/reserve_courts/presentation/pages/reservation_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -47,27 +48,32 @@ class _HomePageState extends State<HomePage> {
             },
             child: const Icon(Icons.add),
             backgroundColor: Colors.green),
-        body: ListView(
-          children: <Widget>[
-            for (var item in list_reservations)
-              Padding(
-                padding: EdgeInsets.all(5),
-                child: Card(
-                  child: Container(
-                    child: Padding(
-                      padding: EdgeInsets.all(15),
-                      child: Column(
-                        children: <Widget>[
-                          Text('Nombre: ${item.nameCourts}'),
-                          Text('Reservada para: ${item.dateReservation}'),
-                          Text('Reservada por: ${item.userName}'),
-                        ],
+        body: list_reservations.isEmpty
+            ? Lottie.network(
+                'https://assets7.lottiefiles.com/packages/lf20_GlZGOi.json',
+                height: 500,
+                width: 500)
+            : ListView(
+                children: <Widget>[
+                  for (var item in list_reservations)
+                    Padding(
+                      padding: EdgeInsets.all(5),
+                      child: Card(
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(15),
+                            child: Column(
+                              children: <Widget>[
+                                Text('Nombre: ${item.nameCourts}'),
+                                Text('Reservada para: ${item.dateReservation}'),
+                                Text('Reservada por: ${item.userName}'),
+                              ],
+                            ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              ),
-          ],
-        ));
+                ],
+              ));
   }
 }
