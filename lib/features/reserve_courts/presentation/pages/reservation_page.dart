@@ -98,15 +98,26 @@ class _ReservationPageState extends State<ReservationPage> {
                   ElevatedButton(
                       child: Text('Reservar'),
                       onPressed: () async {
-                        context.read<ReservationProvider>().createReservation(
-                            userNameEditingController,
-                            courtSelected,
-                            currentDateTime,
-                            '2.0');
-                        await Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomePage()));
+                        var result = await context
+                            .read<ReservationProvider>()
+                            .createReservation(userNameEditingController,
+                                courtSelected, currentDateTime, '2.0');
+                        if (result.contains('NOT_INSERTED')) {
+                          Fluttertoast.showToast(
+                              msg:
+                                  "La cancha $courtSelected ya ha sido reservada 3 veces este dia",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0);
+                        } else {
+                          await Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()));
+                        }
                       }),
                 ]),
               ),

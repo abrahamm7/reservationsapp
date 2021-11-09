@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:reservationsapp/core/providers/reservation_provider.dart';
 import 'package:reservationsapp/features/reserve_courts/data/datasources/reservations_local_datasource.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
-import 'package:reservationsapp/features/reserve_courts/data/repositories/reservation_repository_impl.dart';
-import 'package:reservationsapp/features/reserve_courts/domain/repositories/reservation_repository.dart';
 import 'package:reservationsapp/features/reserve_courts/presentation/pages/reservation_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {

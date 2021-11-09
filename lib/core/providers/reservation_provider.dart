@@ -12,15 +12,18 @@ import 'package:sqflite/sqflite.dart';
 class ReservationProvider with ChangeNotifier {
   ReservationProvider();
 
-  void createReservation(String username, String courtName, DateTime dateTime,
-      String precipitation) {
+  static const String INSERTED = 'INSERTED';
+  static const String NOT_INSERTED = 'NOT_INSERTED';
+
+  Future<String> createReservation(String username, String courtName,
+      DateTime dateTime, String precipitation) {
     var reservation = ReservationModel(
         nameCourts: courtName,
         userName: username,
         dateReservation: dateTime.toIso8601String(),
         precipitationPercentage: precipitation);
-    writeReservations(reservation);
     notifyListeners();
+    return writeReservations(reservation);
   }
 
   Future<List<ReservationModel>> getReservations() async {
@@ -29,9 +32,22 @@ class ReservationProvider with ChangeNotifier {
     return await reservationLocalDataSourceImpl.getReservations();
   }
 
-  Future<void> writeReservations(ReservationModel reservationModel) async {
+  Future<String> writeReservations(ReservationModel reservationModel) async {
     ReservationLocalDataSourceImpl reservationLocalDataSourceImpl =
         ReservationLocalDataSourceImpl();
-    reservationLocalDataSourceImpl.writeReservations(reservationModel);
+    var resrverdCourts = await getReservations();
+    if (resrverdCourts
+            .where((element) =>
+                element.nameCourts == reservationModel.nameCourts &&
+                element.dateReservation == reservationModel.dateReservation)
+            .toList()
+            .length ==
+        3) {
+      return NOT_INSERTED;
+    } else {
+      reservationLocalDataSourceImpl.writeReservations(reservationModel);
+      return INSERTED;
+    }
+    //reservationLocalDataSourceImpl.writeReservations(reservationModel);
   }
 }
