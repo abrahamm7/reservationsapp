@@ -5,8 +5,6 @@ import 'package:reservationsapp/features/reserve_courts/data/datasources/reserva
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:reservationsapp/features/reserve_courts/data/repositories/reservation_repository_impl.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/entities/reservation.dart';
-import 'package:reservationsapp/features/reserve_courts/domain/repositories/reservation_repository.dart';
-import 'package:reservationsapp/features/reserve_courts/domain/usecases/write_reservation.dart';
 
 class MockReservationsLocalDataSource extends Mock
     implements ReservationLocalDataSource {}

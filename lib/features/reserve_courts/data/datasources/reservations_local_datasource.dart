@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:reservationsapp/core/helpers/database_manager.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/entities/reservation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
 abstract class ReservationLocalDataSource {
