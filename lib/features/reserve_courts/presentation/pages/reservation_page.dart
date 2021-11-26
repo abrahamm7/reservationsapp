@@ -89,6 +89,7 @@ class _ReservationPageState extends State<ReservationPage> {
                               });
                             },
                             child: Text('Seleccionar fecha')),
+                        Text('Fecha a reservar: $currentDateTime'),
                         Padding(
                           padding: EdgeInsets.all(10),
                           child: ElevatedButton(
@@ -114,10 +115,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                         textColor: Colors.white,
                                         fontSize: 16.0);
                                   } else {
-                                    await Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HomePage()));
+                                    Navigator.pop(context, true);
                                   }
                                 }
                               },

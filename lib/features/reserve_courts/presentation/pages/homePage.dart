@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reservationsapp/features/reserve_courts/data/datasources/reservations_local_datasource.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:lottie/lottie.dart';
+import 'package:reservationsapp/features/reserve_courts/presentation/pages/reservation_page.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -35,7 +36,10 @@ class _HomePageState extends State<HomePage> {
         ),
         floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Navigator.pushNamed(context, '/reservations');
+              Navigator.of(context)
+                  .push(new MaterialPageRoute(
+                      builder: (_) => new ReservationPage()))
+                  .then((value) => value ? _getListReservations() : null);
             },
             child: const Icon(Icons.add),
             backgroundColor: Colors.green),
