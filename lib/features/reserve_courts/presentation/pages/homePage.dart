@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reservationsapp/features/reserve_courts/data/datasources/reservations_local_datasource.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
-import 'package:reservationsapp/features/reserve_courts/presentation/pages/reservation_page.dart';
 import 'package:lottie/lottie.dart';
 
 class HomePage extends StatefulWidget {
@@ -36,10 +35,7 @@ class _HomePageState extends State<HomePage> {
         ),
         floatingActionButton: FloatingActionButton(
             onPressed: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => ReservationPage()),
-              );
+              Navigator.pushNamed(context, '/reservations');
             },
             child: const Icon(Icons.add),
             backgroundColor: Colors.green),

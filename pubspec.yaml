@@ -24,12 +24,15 @@ dependencies:
   sqflite: ^2.0.0+4
   #Path Provider
   path_provider: ^1.6.27
+  #Date_Picker
+  flutter_datetime_picker: ^1.5.1
   #provider
   provider: ^4.0.1
   json_annotation: ^4.3.0
   # toast
   fluttertoast: ^8.0.8
   lottie: ^1.2.1
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:

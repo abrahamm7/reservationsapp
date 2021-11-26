@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reservationsapp/features/reserve_courts/presentation/pages/homePage.dart';
+import 'package:reservationsapp/features/reserve_courts/presentation/pages/reservation_page.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -7,5 +8,9 @@ void main() {
           appBarTheme: AppBarTheme(color: Colors.red),
           brightness: Brightness.dark,
           primaryColor: Colors.blueGrey),
-      home: HomePage()));
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        '/reservations': (context) => ReservationPage()
+      }));
 }
