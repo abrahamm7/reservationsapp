@@ -87,14 +87,18 @@ class _ReservationPageState extends State<ReservationPage> {
                               });
                             },
                             child: Text('Seleccionar fecha')),
-                        Text('Fecha a reservar: $currentDateTime'),
+                        currentDateTime.isEmpty
+                            ? Text(
+                                'Fecha a reservar: Este campo es obligatorio',
+                              )
+                            : Text('Fecha a reservar: $currentDateTime'),
                         Padding(
                           padding: EdgeInsets.all(10),
                           child: ElevatedButton(
                               onPressed: () async {
                                 if (_reservationKeyForm.currentState!
                                         .validate() &&
-                                    currentDateTime != null) {
+                                    currentDateTime.isNotEmpty) {
                                   var result = await context
                                       .read<ReservationProvider>()
                                       .createReservation(
