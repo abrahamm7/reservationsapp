@@ -18,6 +18,9 @@ class WeatherModel extends Weather {
     _data['current'] = current.toJson();
     return _data;
   }
+
+  @override
+  List<Object?> get props => throw UnimplementedError();
 }
 
 class LocationModel extends Location {
@@ -64,6 +67,9 @@ class LocationModel extends Location {
     _data['localtime'] = localtime;
     return _data;
   }
+
+  @override
+  List<Object?> get props => throw UnimplementedError();
 }
 
 class CurrentModel extends Current {
@@ -98,6 +104,9 @@ class CurrentModel extends Current {
     _data['uv'] = uv;
     return _data;
   }
+
+  @override
+  List<Object?> get props => throw UnimplementedError();
 }
 
 class ConditionModel extends Condition {
@@ -111,4 +120,7 @@ class ConditionModel extends Condition {
     final _data = <String, dynamic>{};
     return _data;
   }
+
+  @override
+  List<Object?> get props => throw UnimplementedError();
 }

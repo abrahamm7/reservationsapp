@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io' as io;
 import 'package:path/path.dart';
-import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 

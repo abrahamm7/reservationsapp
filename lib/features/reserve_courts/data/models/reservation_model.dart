@@ -1,9 +1,5 @@
-import 'dart:convert';
-import 'package:dartz/dartz.dart';
-import 'package:flutter/widgets.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/entities/reservation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 @JsonSerializable()
 class ReservationModel extends Reservations {
@@ -55,4 +51,7 @@ class ReservationModel extends Reservations {
       'precipitationPercentage': precipitationPercentage
     };
   }
+
+  @override
+  List<Object?> get props => throw UnimplementedError();
 }

@@ -1,6 +1,4 @@
-import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:reservationsapp/core/errors/failures.dart';
 import 'package:reservationsapp/core/usecases/usecases.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/entities/reservation.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/repositories/reservation_repository.dart';
@@ -19,5 +17,8 @@ class WriteReservation implements UseCases<Reservations, Params> {
 class Params extends Equatable {
   final Reservations reservations;
 
-  Params({required this.reservations}) : super([reservations]);
+  Params({required this.reservations}) : super();
+
+  @override
+  List<Object?> get props => [reservations];
 }

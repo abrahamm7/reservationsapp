@@ -12,19 +12,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<ReservationModel> list_reservations = [];
+  List<ReservationModel> listReservations = [];
   final ReservationLocalDataSourceImpl reservationLocalDataSourceImpl =
       ReservationLocalDataSourceImpl();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _getListReservations();
   }
 
   void _getListReservations() async {
-    list_reservations = await reservationLocalDataSourceImpl.getReservations();
+    listReservations = await reservationLocalDataSourceImpl.getReservations();
     setState(() {});
   }
 
@@ -43,14 +42,14 @@ class _HomePageState extends State<HomePage> {
             },
             child: const Icon(Icons.add),
             backgroundColor: Colors.green),
-        body: list_reservations.isEmpty
+        body: listReservations.isEmpty
             ? Lottie.network(
                 'https://assets7.lottiefiles.com/packages/lf20_GlZGOi.json',
                 height: 500,
                 width: 500)
             : ListView(
                 children: <Widget>[
-                  for (var item in list_reservations)
+                  for (var item in listReservations)
                     Padding(
                       padding: EdgeInsets.all(5),
                       child: Card(

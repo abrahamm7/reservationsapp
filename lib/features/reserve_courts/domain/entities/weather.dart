@@ -19,6 +19,9 @@ class Weather extends Equatable {
     _data['current'] = current.toJson();
     return _data;
   }
+
+  @override
+  List<Object?> get props => throw UnimplementedError();
 }
 
 class Location extends Equatable {
@@ -64,6 +67,9 @@ class Location extends Equatable {
     _data['localtime'] = localtime;
     return _data;
   }
+
+  @override
+  List<Object?> get props => throw UnimplementedError();
 }
 
 class Current extends Equatable {
@@ -97,6 +103,9 @@ class Current extends Equatable {
     _data['uv'] = uv;
     return _data;
   }
+
+  @override
+  List<Object?> get props => throw UnimplementedError();
 }
 
 class Condition extends Equatable {
@@ -108,4 +117,7 @@ class Condition extends Equatable {
     final _data = <String, dynamic>{};
     return _data;
   }
+
+  @override
+  List<Object?> get props => throw UnimplementedError();
 }

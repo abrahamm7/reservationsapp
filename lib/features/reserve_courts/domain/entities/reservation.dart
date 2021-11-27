@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:equatable/equatable.dart';
 
 class Reservations extends Equatable {
@@ -14,5 +12,9 @@ class Reservations extends Equatable {
       required this.userName,
       required this.dateReservation,
       required this.precipitationPercentage})
-      : super([nameCourts, userName, dateReservation, precipitationPercentage]);
+      : super();
+
+  @override
+  List<Object?> get props =>
+      [nameCourts, userName, dateReservation, precipitationPercentage];
 }

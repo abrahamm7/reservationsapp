@@ -3,7 +3,6 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:reservationsapp/core/providers/reservation_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:reservationsapp/features/reserve_courts/presentation/pages/homePage.dart';
 import 'package:intl/intl.dart';
 
 class ReservationPage extends StatefulWidget {
@@ -16,7 +15,6 @@ class ReservationPage extends StatefulWidget {
 class _ReservationPageState extends State<ReservationPage> {
   var courtSelected;
   var currentDateTime = "";
-  var userNameEditingController;
   List<String> options = [];
   String result = "";
   TextEditingController userNameController = TextEditingController();

@@ -12,27 +12,25 @@ dependencies:
   # Service locator
   get_it: ^2.0.1
   # Value equality
-  equatable: ^0.4.0
+  equatable: ^2.0.3
   # Functional programming thingies
-  dartz: ^0.8.6
+  dartz: ^0.10.0
   # Remote API
   connectivity: ^0.4.3+7
-  http: ^0.12.0+2
-  # Local cache
-  shared_preferences: ^0.5.3+4
+  http: ^0.13.4
   #Local Database
   sqflite: ^2.0.0+4
   #Path Provider
-  path_provider: ^1.6.27
+  path_provider: ^2.0.7
   #Date_Picker
   flutter_datetime_picker: ^1.5.1
   #provider
-  provider: ^4.0.1
+  provider: ^6.0.1
   json_annotation: ^4.3.0
   # toast
   fluttertoast: ^8.0.8
   lottie: ^1.2.1
-  intl: ^0.16.1
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
