@@ -23,7 +23,7 @@ class DBHelper {
   void _onCreate(Database db, int version) async {
     // When creating the db, create the table
     await db.execute(
-        "CREATE TABLE Reservations(id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nameCourts TEXT, userName TEXT, dateReservation TEXT, precipitationPercentage TEXT )");
+        "CREATE TABLE Reservations(id INTEGER PRIMARY KEY, nameCourts TEXT, userName TEXT, dateReservation TEXT, precipitationPercentage TEXT )");
     print("Created tables");
   }
 }

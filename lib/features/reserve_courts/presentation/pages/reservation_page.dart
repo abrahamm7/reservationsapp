@@ -13,6 +13,7 @@ class ReservationPage extends StatefulWidget {
 }
 
 class _ReservationPageState extends State<ReservationPage> {
+  static const String VALIDATE_TEXT = 'Este campo es obligatorio';
   var courtSelected;
   var currentDateTime = "";
   List<String> options = [];
@@ -48,7 +49,7 @@ class _ReservationPageState extends State<ReservationPage> {
                           controller: userNameController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Este campo es obligatorio';
+                              return VALIDATE_TEXT;
                             }
                           },
                           decoration:
@@ -67,9 +68,8 @@ class _ReservationPageState extends State<ReservationPage> {
                                 courtSelected = value;
                               });
                             },
-                            validator: (value) => value == null
-                                ? 'Este campo es obligatorio'
-                                : null),
+                            validator: (value) =>
+                                value == null ? VALIDATE_TEXT : null),
                         SizedBox(
                           height: 10,
                         ),
@@ -89,7 +89,7 @@ class _ReservationPageState extends State<ReservationPage> {
                             child: Text('Seleccionar fecha')),
                         currentDateTime.isEmpty
                             ? Text(
-                                'Fecha a reservar: Este campo es obligatorio',
+                                'Fecha a reservar: $VALIDATE_TEXT',
                               )
                             : Text('Fecha a reservar: $currentDateTime'),
                         Padding(

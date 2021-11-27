@@ -10,6 +10,7 @@ class ReservationModel extends Reservations {
       required final String? dateReservation,
       required final String? precipitationPercentage})
       : super(
+            id: id,
             nameCourts: nameCourts,
             userName: userName,
             dateReservation: dateReservation,
@@ -45,6 +46,7 @@ class ReservationModel extends Reservations {
 
   Map<String, dynamic> toDbMap() {
     return {
+      'id': id,
       'nameCourts': nameCourts,
       'userName': userName,
       'dateReservation': dateReservation,

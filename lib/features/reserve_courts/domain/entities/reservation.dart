@@ -8,7 +8,8 @@ class Reservations extends Equatable {
   final String? precipitationPercentage;
 
   Reservations(
-      {required this.nameCourts,
+      {this.id,
+      required this.nameCourts,
       required this.userName,
       required this.dateReservation,
       required this.precipitationPercentage})
@@ -16,5 +17,5 @@ class Reservations extends Equatable {
 
   @override
   List<Object?> get props =>
-      [nameCourts, userName, dateReservation, precipitationPercentage];
+      [id, nameCourts, userName, dateReservation, precipitationPercentage];
 }

@@ -5,11 +5,13 @@ import 'package:reservationsapp/core/providers/reservation_provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class CardReservation extends StatefulWidget {
+  final int? id;
   final String? nameCourts;
   final String? userName;
   final String? dateReservation;
   CardReservation(
       {Key? key,
+      required this.id,
       required this.nameCourts,
       required this.userName,
       required this.dateReservation})
@@ -56,7 +58,12 @@ class _CardReservationState extends State<CardReservation> {
                       "Si",
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
-                    onPressed: () => Navigator.pop(context),
+                    onPressed: () {
+                      context
+                          .read<ReservationProvider>()
+                          .deleteReservation(widget.id as int);
+                      Navigator.pop(context, true);
+                    },
                     color: Colors.red,
                   ),
                   DialogButton(
@@ -69,7 +76,6 @@ class _CardReservationState extends State<CardReservation> {
                   )
                 ],
               ).show();
-              //context.read<ReservationProvider>().deleteReservation(1);
             },
           ),
         );
