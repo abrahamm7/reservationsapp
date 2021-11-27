@@ -6,7 +6,7 @@ void main() {
   runApp(MaterialApp(
       theme: ThemeData(
           appBarTheme: AppBarTheme(color: Colors.red),
-          brightness: Brightness.dark,
+          brightness: Brightness.light,
           primaryColor: Colors.blueGrey),
       initialRoute: '/',
       routes: {

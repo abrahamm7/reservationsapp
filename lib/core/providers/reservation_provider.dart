@@ -42,4 +42,10 @@ class ReservationProvider with ChangeNotifier {
       return INSERTED;
     }
   }
+
+  void deleteReservation(int id) {
+    ReservationLocalDataSourceImpl reservationLocalDataSourceImpl =
+        ReservationLocalDataSourceImpl();
+    reservationLocalDataSourceImpl.deleteReservations(id);
+  }
 }
