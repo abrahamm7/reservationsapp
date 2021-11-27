@@ -3,6 +3,7 @@ import 'package:reservationsapp/features/reserve_courts/data/datasources/reserva
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:lottie/lottie.dart';
 import 'package:reservationsapp/features/reserve_courts/presentation/pages/reservation_page.dart';
+import 'package:reservationsapp/features/reserve_courts/presentation/widgets/cardreservation.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
@@ -50,23 +51,10 @@ class _HomePageState extends State<HomePage> {
             : ListView(
                 children: <Widget>[
                   for (var item in listReservations)
-                    Padding(
-                      padding: EdgeInsets.all(5),
-                      child: Card(
-                        child: Container(
-                          child: Padding(
-                            padding: EdgeInsets.all(15),
-                            child: Column(
-                              children: <Widget>[
-                                Text('Nombre: ${item.nameCourts}'),
-                                Text('Reservada para: ${item.dateReservation}'),
-                                Text('Reservada por: ${item.userName}'),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    CardReservation(
+                        nameCourts: item.nameCourts,
+                        userName: item.userName,
+                        dateReservation: item.dateReservation)
                 ],
               ));
   }
