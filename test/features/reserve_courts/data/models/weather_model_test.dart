@@ -1,7 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/weather_model.dart';
-import 'package:reservationsapp/features/reserve_courts/domain/entities/reservation.dart';
 import 'package:reservationsapp/features/reserve_courts/domain/entities/weather.dart';
 
 void main() {

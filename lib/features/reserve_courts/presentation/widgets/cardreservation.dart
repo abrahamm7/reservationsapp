@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class CardReservation extends StatelessWidget {
+class CardReservation extends StatefulWidget {
   final String? nameCourts;
   final String? userName;
   final String? dateReservation;
@@ -12,22 +13,32 @@ class CardReservation extends StatelessWidget {
       : super(key: key);
 
   @override
+  _CardReservationState createState() => _CardReservationState();
+}
+
+class _CardReservationState extends State<CardReservation> {
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(5),
-      child: Card(
-        child: Container(
-          child: Padding(
-            padding: EdgeInsets.all(15),
-            child: Column(
-              children: <Widget>[
-                Text('Nombre: $nameCourts'),
-                Text('Fecha de reservación: $dateReservation'),
-                Text('Reservada por: $userName'),
-              ],
+      child: GestureDetector(
+        child: Card(
+          child: Container(
+            child: Padding(
+              padding: EdgeInsets.all(15),
+              child: Column(
+                children: <Widget>[
+                  Text('Nombre: ${widget.nameCourts}'),
+                  Text('Fecha de reservación: ${widget.dateReservation}'),
+                  Text('Reservada por: ${widget.userName}'),
+                ],
+              ),
             ),
           ),
         ),
+        onLongPress: () {
+          HapticFeedback.vibrate();
+        },
       ),
     );
   }
