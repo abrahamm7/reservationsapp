@@ -31,32 +31,33 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Canchas'),
-        ),
-        floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.of(context)
-                  .push(new MaterialPageRoute(
-                      builder: (_) => new ReservationPage()))
-                  .then((value) => value ? _getListReservations() : null);
-            },
-            child: const Icon(Icons.add),
-            backgroundColor: Colors.green),
-        body: listReservations.isEmpty
-            ? Lottie.network(
-                'https://assets7.lottiefiles.com/packages/lf20_GlZGOi.json',
-                height: 500,
-                width: 500)
-            : ListView(
-                children: <Widget>[
-                  for (var item in listReservations)
-                    CardReservation(
-                        id: item.id,
-                        nameCourts: item.nameCourts,
-                        userName: item.userName,
-                        dateReservation: item.dateReservation)
-                ],
-              ));
+      appBar: AppBar(
+        title: Text('Canchas'),
+      ),
+      body: listReservations.isEmpty
+          ? Lottie.network(
+              'https://assets7.lottiefiles.com/packages/lf20_GlZGOi.json',
+              height: 500,
+              width: 500)
+          : ListView(
+              children: <Widget>[
+                for (var item in listReservations)
+                  CardReservation(
+                      id: item.id,
+                      nameCourts: item.nameCourts,
+                      userName: item.userName,
+                      dateReservation: item.dateReservation)
+              ],
+            ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context)
+                .push(new MaterialPageRoute(
+                    builder: (_) => new ReservationPage()))
+                .then((value) => value ? _getListReservations() : null);
+          },
+          child: const Icon(Icons.add),
+          backgroundColor: Colors.red),
+    );
   }
 }
