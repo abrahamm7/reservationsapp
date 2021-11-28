@@ -33,7 +33,6 @@ class ReservationLocalDataSourceImpl implements ReservationLocalDataSource {
       ReservationModel reservations = ReservationModel.fromDbMap(result);
       reservationsList.add(reservations);
     });
-    print(reservationsList.length);
     return reservationsList;
   }
 }
