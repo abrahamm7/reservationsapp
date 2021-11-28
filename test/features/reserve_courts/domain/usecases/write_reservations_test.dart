@@ -10,7 +10,6 @@ class MockReservationsRepository extends Mock implements ReservationRepository {
 void main() {
   late WriteReservation usecase;
   late MockReservationsRepository mockWriteReservations;
-  final Reservations reservations;
   setUp(() {
     mockWriteReservations = MockReservationsRepository();
     usecase = WriteReservation(mockWriteReservations);
@@ -19,7 +18,7 @@ void main() {
   final reservation = Reservations(
       nameCourts: "A",
       userName: "Abraham",
-      dateReservation: "${DateTime.now().hour}",
+      dateReservation: "${DateTime.now()}",
       precipitationPercentage: "3");
 
   test('Test to reserve courts', () async {

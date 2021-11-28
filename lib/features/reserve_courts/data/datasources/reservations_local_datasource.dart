@@ -25,7 +25,7 @@ class ReservationLocalDataSourceImpl implements ReservationLocalDataSource {
   Future<List<ReservationModel>> getReservationsFromLocalStorage() async {
     Database? _db;
     _db = await DBHelper().initDb();
-    var dbClient = await _db;
+    var dbClient = _db;
     var list = await dbClient?.query('Reservations');
     List<ReservationModel> reservationsList = [];
 
@@ -42,7 +42,7 @@ Future<void> insertReservationsIntoLocalStorage(
     Reservations reservations) async {
   Database? _db;
   _db = await DBHelper().initDb();
-  var dbClient = await _db;
+  var dbClient = _db;
   var reservationModel = reservations as ReservationModel;
   await dbClient?.insert("Reservations", reservationModel.toDbMap());
   print(await dbClient?.query('Reservations'));
@@ -51,6 +51,6 @@ Future<void> insertReservationsIntoLocalStorage(
 Future<void> deleteReservationsFromLocalStorage(int id) async {
   Database? _db;
   _db = await DBHelper().initDb();
-  var dbClient = await _db;
+  var dbClient = _db;
   dbClient?.rawDelete("DELETE FROM Reservations WHERE id = $id");
 }
