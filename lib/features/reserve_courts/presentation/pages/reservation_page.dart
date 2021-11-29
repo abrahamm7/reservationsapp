@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:reservationsapp/core/providers/reservation_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
+import 'package:reservationsapp/features/reserve_courts/data/datasources/weather_cloud_datasource.dart';
 
 class ReservationPage extends StatefulWidget {
   ReservationPage({Key? key}) : super(key: key);
@@ -16,17 +17,32 @@ class _ReservationPageState extends State<ReservationPage> {
   static const String VALIDATE_TEXT = 'Este campo es obligatorio';
   var courtSelected;
   var currentDateTime = "";
+  var rainProbability = 0;
   List<String> options = [];
   String result = "";
   TextEditingController userNameController = TextEditingController();
+  var forecastList;
+  final WeatherCloudDataSourceImpl weatherCloudDataSourceImpl =
+      WeatherCloudDataSourceImpl();
+
+  void _getForecast() async {
+    forecastList = await weatherCloudDataSourceImpl.getWeatherFromCloud();
+    setState(() {});
+  }
+
+  void _getForecastByDate(String dateTime) {
+    setState(() {});
+  }
 
   @override
   void initState() {
     super.initState();
     options = ['Cancha A', 'Cancha B', 'Cancha C'];
+    _getForecast();
   }
 
   final _reservationKeyForm = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ReservationProvider>(
@@ -83,6 +99,16 @@ class _ReservationPageState extends State<ReservationPage> {
                                 setState(() {
                                   var formatter = new DateFormat('yyyy-MM-dd');
                                   currentDateTime = formatter.format(date);
+                                  _getForecastByDate(currentDateTime);
+                                  Fluttertoast.showToast(
+                                      msg:
+                                          "Probabilidad de lluvia es $rainProbability",
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0);
                                 });
                               });
                             },

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reservationsapp/features/reserve_courts/data/datasources/reservations_local_datasource.dart';
+import 'package:reservationsapp/features/reserve_courts/data/datasources/weather_cloud_datasource.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:lottie/lottie.dart';
 import 'package:reservationsapp/features/reserve_courts/presentation/pages/reservation_page.dart';
@@ -14,8 +15,11 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<ReservationModel> listReservations = [];
+  List<dynamic> listWeather = [];
   final ReservationLocalDataSourceImpl reservationLocalDataSourceImpl =
       ReservationLocalDataSourceImpl();
+  final WeatherCloudDataSourceImpl weatherCloudDataSourceImpl =
+      WeatherCloudDataSourceImpl();
 
   @override
   void initState() {
