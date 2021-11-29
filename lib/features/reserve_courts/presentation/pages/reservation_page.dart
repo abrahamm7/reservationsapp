@@ -6,6 +6,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:reservationsapp/features/reserve_courts/data/datasources/weather_cloud_datasource.dart';
 import 'package:reservationsapp/features/reserve_courts/data/models/forecastWeather_model.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class ReservationPage extends StatefulWidget {
   ReservationPage({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class _ReservationPageState extends State<ReservationPage> {
   var currentDateTime = "";
   var conditionDateTime = "";
   num rainProbability = 0;
+  num humidity = 0;
   List<String> options = [];
   List<ForecastWeatherModel> forecastList = [];
   String result = "";
@@ -39,6 +41,7 @@ class _ReservationPageState extends State<ReservationPage> {
           .toList();
       if (forecast.isNotEmpty) {
         rainProbability = forecast.map((e) => e.day.dailyChanceOfRain).single;
+        humidity = forecast.map((e) => e.day.avghumidity).single;
       } else {
         rainProbability = 0;
       }
@@ -145,15 +148,27 @@ class _ReservationPageState extends State<ReservationPage> {
                                           currentDateTime,
                                           '2.0');
                                   if (result.contains('NOT_INSERTED')) {
-                                    Fluttertoast.showToast(
-                                        msg:
-                                            "La cancha $courtSelected ya ha sido reservada 3 veces este dia",
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.BOTTOM,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.red,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
+                                    Alert(
+                                      context: context,
+                                      type: AlertType.info,
+                                      title: "Información",
+                                      desc:
+                                          "La $courtSelected ya ha sido reservada 3 veces este dia",
+                                      buttons: [
+                                        DialogButton(
+                                          child: Text(
+                                            "Seleccionar otra fecha",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          color: Colors.red,
+                                        ),
+                                      ],
+                                    ).show();
                                   } else {
                                     Navigator.pop(context, true);
                                   }
