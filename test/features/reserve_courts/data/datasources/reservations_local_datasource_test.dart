@@ -21,7 +21,7 @@ void main() {
   var reservationsModel = ReservationModel(
       nameCourts: "A",
       userName: "Abraham",
-      dateReservation: DateTime.now().toIso8601String(),
+      dateReservation: DateTime.now().toString(),
       precipitationPercentage: "3.5");
 
   final Reservations reservations = reservationsModel;

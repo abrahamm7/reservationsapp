@@ -21,7 +21,6 @@ class _ReservationPageState extends State<ReservationPage> {
   var currentDateTime = "";
   var conditionDateTime = "";
   num rainProbability = 0;
-  num humidity = 0;
   List<String> options = [];
   List<ForecastWeatherModel> forecastList = [];
   String result = "";
@@ -41,7 +40,6 @@ class _ReservationPageState extends State<ReservationPage> {
           .toList();
       if (forecast.isNotEmpty) {
         rainProbability = forecast.map((e) => e.day.dailyChanceOfRain).single;
-        humidity = forecast.map((e) => e.day.avghumidity).single;
       } else {
         rainProbability = 0;
       }
