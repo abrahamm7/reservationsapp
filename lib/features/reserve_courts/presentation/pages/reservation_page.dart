@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:reservationsapp/core/platform/connectivity.dart';
 import 'package:reservationsapp/core/providers/reservation_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
@@ -20,6 +21,7 @@ class _ReservationPageState extends State<ReservationPage> {
   var courtSelected;
   var currentDateTime = "";
   var conditionDateTime = "";
+  bool isOnline = false;
   num rainProbability = 0;
   List<String> options = [];
   List<ForecastWeatherModel> forecastList = [];
@@ -47,11 +49,15 @@ class _ReservationPageState extends State<ReservationPage> {
     setState(() {});
   }
 
+  void _getInternet() async {
+    isOnline = await CheckInternetConnection.check().then((value) => value);
+  }
+
   @override
   void initState() {
     super.initState();
     options = ['Cancha A', 'Cancha B', 'Cancha C'];
-    _getForecast();
+    _getInternet();
   }
 
   final _reservationKeyForm = GlobalKey<FormState>();
@@ -113,15 +119,28 @@ class _ReservationPageState extends State<ReservationPage> {
                                   var formatter = new DateFormat('yyyy-MM-dd');
                                   currentDateTime = formatter.format(date);
                                   _getForecastByDate(currentDateTime);
-                                  Fluttertoast.showToast(
-                                      msg:
-                                          "Probabilidad de lluvia es $rainProbability",
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM,
-                                      timeInSecForIosWeb: 1,
-                                      backgroundColor: Colors.red,
-                                      textColor: Colors.white,
-                                      fontSize: 16.0);
+                                  if (isOnline == true) {
+                                    _getForecast();
+                                    Fluttertoast.showToast(
+                                        msg:
+                                            "Probabilidad de lluvia es $rainProbability",
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.BOTTOM,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+                                  } else {
+                                    Fluttertoast.showToast(
+                                        msg:
+                                            "No hay conexión a internet para obtener las condiciones del tiempo",
+                                        toastLength: Toast.LENGTH_SHORT,
+                                        gravity: ToastGravity.BOTTOM,
+                                        timeInSecForIosWeb: 1,
+                                        backgroundColor: Colors.red,
+                                        textColor: Colors.white,
+                                        fontSize: 16.0);
+                                  }
                                 });
                               });
                             },
@@ -131,49 +150,47 @@ class _ReservationPageState extends State<ReservationPage> {
                                 'Fecha a reservar: $VALIDATE_TEXT',
                               )
                             : Text('Fecha a reservar: $currentDateTime'),
-                        Padding(
-                          padding: EdgeInsets.all(10),
-                          child: ElevatedButton(
-                              onPressed: () async {
-                                if (_reservationKeyForm.currentState!
-                                        .validate() &&
-                                    currentDateTime.isNotEmpty) {
-                                  var result = await context
-                                      .read<ReservationProvider>()
-                                      .createReservation(
-                                          userNameController.text,
-                                          courtSelected,
-                                          currentDateTime,
-                                          '2.0');
-                                  if (result.contains('NOT_INSERTED')) {
-                                    Alert(
-                                      context: context,
-                                      type: AlertType.info,
-                                      title: "Información",
-                                      desc:
-                                          "La $courtSelected ya ha sido reservada 3 veces este dia",
-                                      buttons: [
-                                        DialogButton(
-                                          child: Text(
-                                            "Seleccionar otra fecha",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
+                        Center(
+                            child: ElevatedButton(
+                                onPressed: () async {
+                                  if (_reservationKeyForm.currentState!
+                                          .validate() &&
+                                      currentDateTime.isNotEmpty) {
+                                    var result = await context
+                                        .read<ReservationProvider>()
+                                        .createReservation(
+                                            userNameController.text,
+                                            courtSelected,
+                                            currentDateTime,
+                                            '2.0');
+                                    if (result.contains('NOT_INSERTED')) {
+                                      Alert(
+                                        context: context,
+                                        type: AlertType.info,
+                                        title: "Información",
+                                        desc:
+                                            "La $courtSelected ya ha sido reservada 3 veces este dia",
+                                        buttons: [
+                                          DialogButton(
+                                            child: Text(
+                                              "Seleccionar otra fecha",
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            color: Colors.red,
                                           ),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          color: Colors.red,
-                                        ),
-                                      ],
-                                    ).show();
-                                  } else {
-                                    Navigator.pop(context, true);
+                                        ],
+                                      ).show();
+                                    } else {
+                                      Navigator.pop(context, true);
+                                    }
                                   }
-                                }
-                              },
-                              child: Text('Reservar')),
-                        ),
+                                },
+                                child: Text('Reservar'))),
                       ],
                     )),
               ),

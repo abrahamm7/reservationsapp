@@ -16,7 +16,7 @@ dependencies:
   # Functional programming thingies
   dartz: ^0.10.0
   # Remote API
-  connectivity: ^0.4.3+7
+  connectivity: ^3.0.6
   http: ^0.13.4
   #Local Database
   sqflite: ^2.0.0+4
