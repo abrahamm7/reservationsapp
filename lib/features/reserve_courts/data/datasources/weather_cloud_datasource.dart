@@ -1,28 +1,27 @@
 import 'dart:convert';
-
 import 'package:reservationsapp/core/helpers/api_request.dart';
 import 'package:http/http.dart' as http;
-import 'package:reservationsapp/features/reserve_courts/domain/entities/forecastWeather.dart';
+import 'package:reservationsapp/features/reserve_courts/data/models/forecastWeather_model.dart';
 
 abstract class WeatherCloudDataSource {
-  Future<List<Forecastday>> getWeatherFromCloud();
+  Future<List<ForecastWeatherModel>> getWeatherFromCloud();
 }
 
 class WeatherCloudDataSourceImpl extends WeatherCloudDataSource {
   @override
-  Future<List<Forecastday>> getWeatherFromCloud() async {
+  Future<List<ForecastWeatherModel>> getWeatherFromCloud() async {
     return await getWeatherData();
   }
 
-  Future<List<Forecastday>> getWeatherData() async {
+  Future<List<ForecastWeatherModel>> getWeatherData() async {
+    List<ForecastWeatherModel> forecastList = [];
     http.Response response =
         await http.get(Uri.parse(ApiRequest.requestWeather));
 
     if (response.statusCode == 200) {
       var map = json.decode(response.body);
-      var forecastWeather = ForecastWeather.fromJson(map);
-      var forecastList = forecastWeather.forecast.forecastday;
-      print(forecastList.length);
+      var forecastWeather = ForecastWeatherModel.fromJson(map);
+      forecastList.add(forecastWeather);
       return forecastList;
     } else {
       throw Exception('Error while fetch data');

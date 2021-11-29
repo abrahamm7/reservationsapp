@@ -1,4 +1,6 @@
-class ForecastWeather {
+import 'package:equatable/equatable.dart';
+
+class ForecastWeather extends Equatable {
   ForecastWeather({
     required this.location,
     required this.current,
@@ -22,9 +24,16 @@ class ForecastWeather {
     _data['forecast'] = forecast.toJson();
     return _data;
   }
+
+  @override
+  List<Object?> get props => [
+        location,
+        current,
+        forecast,
+      ];
 }
 
-class Location {
+class Location extends Equatable {
   Location({
     required this.name,
     required this.region,
@@ -67,9 +76,21 @@ class Location {
     _data['localtime'] = localtime;
     return _data;
   }
+
+  @override
+  List<Object?> get props => [
+        name,
+        region,
+        country,
+        lat,
+        lon,
+        tzId,
+        localtimeEpoch,
+        localtime,
+      ];
 }
 
-class Current {
+class Current extends Equatable {
   Current({
     required this.condition,
     required this.pressureIn,
@@ -83,12 +104,13 @@ class Current {
   late final num precipIn;
   late final num uv;
 
-  Current.fromJson(Map<String, dynamic> json) {
-    condition = Condition.fromJson(json['condition']);
-    pressureIn = json['pressure_in'];
-    precipMm = json['precip_mm'];
-    precipIn = json['precip_in'];
-    uv = json['uv'];
+  factory Current.fromJson(Map<String, dynamic> json) {
+    return Current(
+        condition: Condition.fromJson(json['condition']),
+        pressureIn: json['pressure_in'],
+        precipMm: json['precip_mm'],
+        precipIn: json['precip_in'],
+        uv: json['uv']);
   }
 
   Map<String, dynamic> toJson() {
@@ -100,20 +122,34 @@ class Current {
     _data['uv'] = uv;
     return _data;
   }
+
+  @override
+  List<Object?> get props => [
+        condition,
+        pressureIn,
+        precipMm,
+        precipIn,
+        uv,
+      ];
 }
 
-class Condition {
+class Condition extends Equatable {
   Condition();
 
-  Condition.fromJson(Map json);
+  factory Condition.fromJson(Map json) {
+    return Condition();
+  }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     return _data;
   }
+
+  @override
+  List<Object?> get props => [];
 }
 
-class Forecast {
+class Forecast extends Equatable {
   Forecast({
     required this.forecastday,
   });
@@ -130,9 +166,12 @@ class Forecast {
     _data['forecastday'] = forecastday.map((e) => e.toJson()).toList();
     return _data;
   }
+
+  @override
+  List<Object?> get props => [forecastday];
 }
 
-class Forecastday {
+class Forecastday extends Equatable {
   Forecastday({
     required this.date,
     required this.dateEpoch,
@@ -163,9 +202,18 @@ class Forecastday {
     _data['hour'] = hour.map((e) => e.toJson()).toList();
     return _data;
   }
+
+  @override
+  List<Object?> get props => [
+        date,
+        dateEpoch,
+        day,
+        astro,
+        hour,
+      ];
 }
 
-class Day {
+class Day extends Equatable {
   Day({
     required this.maxtempC,
     required this.maxtempF,
@@ -207,26 +255,27 @@ class Day {
   late final Condition condition;
   late final num uv;
 
-  Day.fromJson(Map<String, dynamic> json) {
-    maxtempC = json['maxtemp_c'];
-    maxtempF = json['maxtemp_f'];
-    mintempC = json['mintemp_c'];
-    mintempF = json['mintemp_f'];
-    avgtempC = json['avgtemp_c'];
-    avgtempF = json['avgtemp_f'];
-    maxwindMph = json['maxwind_mph'];
-    maxwindKph = json['maxwind_kph'];
-    totalprecipMm = json['totalprecip_mm'];
-    totalprecipIn = json['totalprecip_in'];
-    avgvisKm = json['avgvis_km'];
-    avgvisMiles = json['avgvis_miles'];
-    avghumidity = json['avghumidity'];
-    dailyWillItRain = json['daily_will_it_rain'];
-    dailyChanceOfRain = json['daily_chance_of_rain'];
-    dailyWillItSnow = json['daily_will_it_snow'];
-    dailyChanceOfSnow = json['daily_chance_of_snow'];
-    condition = Condition.fromJson(json['condition']);
-    uv = json['uv'];
+  factory Day.fromJson(Map<String, dynamic> json) {
+    return Day(
+        maxtempC: json['maxtemp_c'],
+        maxtempF: json['maxtemp_f'],
+        mintempC: json['mintemp_c'],
+        mintempF: json['mintemp_f'],
+        avgtempC: json['avgtemp_c'],
+        avgtempF: json['avgtemp_f'],
+        maxwindMph: json['maxwind_mph'],
+        maxwindKph: json['maxwind_kph'],
+        totalprecipMm: json['totalprecip_mm'],
+        totalprecipIn: json['totalprecip_in'],
+        avgvisKm: json['avgvis_km'],
+        avgvisMiles: json['avgvis_miles'],
+        avghumidity: json['avghumidity'],
+        dailyWillItRain: json['daily_will_it_rain'],
+        dailyChanceOfRain: json['daily_chance_of_rain'],
+        dailyWillItSnow: json['daily_will_it_snow'],
+        dailyChanceOfSnow: json['daily_chance_of_snow'],
+        condition: Condition.fromJson(json['condition']),
+        uv: json['uv']);
   }
 
   Map<String, dynamic> toJson() {
@@ -252,9 +301,32 @@ class Day {
     _data['uv'] = uv;
     return _data;
   }
+
+  @override
+  List<Object?> get props => [
+        maxtempC,
+        maxtempF,
+        mintempC,
+        mintempF,
+        avgtempC,
+        avgtempF,
+        maxwindMph,
+        maxwindKph,
+        totalprecipMm,
+        totalprecipIn,
+        avgvisKm,
+        avgvisMiles,
+        avghumidity,
+        dailyWillItRain,
+        dailyChanceOfRain,
+        dailyWillItSnow,
+        dailyChanceOfSnow,
+        condition,
+        uv,
+      ];
 }
 
-class Astro {
+class Astro extends Equatable {
   Astro({
     required this.sunrise,
     required this.sunset,
@@ -289,9 +361,19 @@ class Astro {
     _data['moon_illumination'] = moonIllumination;
     return _data;
   }
+
+  @override
+  List<Object?> get props => [
+        sunrise,
+        sunset,
+        moonrise,
+        moonset,
+        moonPhase,
+        moonIllumination,
+      ];
 }
 
-class Hour {
+class Hour extends Equatable {
   Hour({
     required this.condition,
     required this.humidity,
@@ -382,4 +464,28 @@ class Hour {
     _data['uv'] = uv;
     return _data;
   }
+
+  @override
+  List<Object?> get props => [
+        condition,
+        humidity,
+        cloud,
+        feelslikeC,
+        feelslikeF,
+        windchillC,
+        windchillF,
+        heatindexC,
+        heatindexF,
+        dewpointC,
+        dewpointF,
+        willItRain,
+        chanceOfRain,
+        willItSnow,
+        chanceOfSnow,
+        visKm,
+        visMiles,
+        gustMph,
+        gustKph,
+        uv,
+      ];
 }

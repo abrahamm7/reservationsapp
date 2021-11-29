@@ -5,6 +5,7 @@ import 'package:reservationsapp/core/providers/reservation_provider.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:reservationsapp/features/reserve_courts/data/datasources/weather_cloud_datasource.dart';
+import 'package:reservationsapp/features/reserve_courts/data/models/forecastWeather_model.dart';
 
 class ReservationPage extends StatefulWidget {
   ReservationPage({Key? key}) : super(key: key);
@@ -17,11 +18,12 @@ class _ReservationPageState extends State<ReservationPage> {
   static const String VALIDATE_TEXT = 'Este campo es obligatorio';
   var courtSelected;
   var currentDateTime = "";
-  var rainProbability = 0;
+  var conditionDateTime = "";
+  num rainProbability = 0;
   List<String> options = [];
+  List<ForecastWeatherModel> forecastList = [];
   String result = "";
   TextEditingController userNameController = TextEditingController();
-  var forecastList;
   final WeatherCloudDataSourceImpl weatherCloudDataSourceImpl =
       WeatherCloudDataSourceImpl();
 
@@ -31,6 +33,16 @@ class _ReservationPageState extends State<ReservationPage> {
   }
 
   void _getForecastByDate(String dateTime) {
+    for (var item in forecastList) {
+      var forecast = item.forecast.forecastday
+          .where((element) => element.date == dateTime)
+          .toList();
+      if (forecast.isNotEmpty) {
+        rainProbability = forecast.map((e) => e.day.dailyChanceOfRain).single;
+      } else {
+        rainProbability = 0;
+      }
+    }
     setState(() {});
   }
 
