@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:reservationsapp/core/platform/connectivity.dart';
 import 'package:reservationsapp/core/providers/reservation_provider.dart';
@@ -105,96 +106,105 @@ class _ReservationPageState extends State<ReservationPage> {
               title: Text('Agendar cancha'),
             ),
             body: Container(
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Form(
-                    key: _reservationKeyForm,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextFormField(
-                          controller: userNameController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return VALIDATE_TEXT;
-                            }
-                          },
-                          decoration:
-                              InputDecoration(hintText: 'Ingrese su nombre'),
-                        ),
-                        DropdownButtonFormField<String>(
-                            hint: Text('Seleccione una cancha'),
-                            items: options.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (value) {
-                              setState(() {
-                                courtSelected = value;
-                              });
-                            },
-                            validator: (value) =>
-                                value == null ? VALIDATE_TEXT : null),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        ElevatedButton(
-                            onPressed: () {
-                              DatePicker.showDatePicker(context,
-                                  showTitleActions: true,
-                                  minTime: DateTime(2018, 3, 5),
-                                  maxTime: DateTime(2025, 6, 7),
-                                  onChanged: (date) {
-                                setState(() {
-                                  var formatter = new DateFormat('yyyy-MM-dd');
-                                  currentDateTime = formatter.format(date);
-                                  if (isOnline == true) {
-                                    _getForecastByDate(currentDateTime);
-                                    _getForecast();
-                                    _showToast(
-                                        "Probabilidad de lluvia es $rainProbability %");
-                                  } else {
-                                    _showToast(
-                                        "No hay conexión a internet para obtener las condiciones del tiempo");
-                                  }
-                                });
-                              });
-                            },
-                            child: Text('Seleccionar fecha')),
-                        currentDateTime.isEmpty
-                            ? Text(
-                                'Fecha a reservar: $VALIDATE_TEXT',
-                              )
-                            : Text('Fecha a reservar: $currentDateTime'),
-                        Center(
-                            child: ElevatedButton(
-                                onPressed: () async {
-                                  if (_reservationKeyForm.currentState!
-                                          .validate() &&
-                                      currentDateTime.isNotEmpty) {
-                                    var result = await context
-                                        .read<ReservationProvider>()
-                                        .createReservation(
-                                            userNameController.text,
-                                            courtSelected,
-                                            currentDateTime,
-                                            rainProbability.toString());
-                                    if (result.contains('NOT_INSERTED')) {
-                                      _showDialog(
-                                          "Información",
-                                          "La $courtSelected ya ha sido reservada 3 veces este dia",
-                                          "Seleccionar otra fecha",
-                                          context);
-                                    } else {
-                                      Navigator.pop(context, true);
-                                    }
-                                  }
+              child: ListView(
+                children: <Widget>[
+                  Lottie.asset('assets/lottieJSON/reserve-court.json',
+                      height: 300, width: 300),
+                  Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Form(
+                        key: _reservationKeyForm,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            TextFormField(
+                              controller: userNameController,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return VALIDATE_TEXT;
+                                }
+                              },
+                              decoration: InputDecoration(
+                                  hintText: 'Ingrese su nombre'),
+                            ),
+                            SizedBox(height: 60),
+                            DropdownButtonFormField<String>(
+                                hint: Text('Seleccione una cancha'),
+                                items: options.map((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    courtSelected = value;
+                                  });
                                 },
-                                child: Text('Reservar'))),
-                      ],
-                    )),
+                                validator: (value) =>
+                                    value == null ? VALIDATE_TEXT : null),
+                            SizedBox(
+                              height: 60,
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  DatePicker.showDatePicker(context,
+                                      showTitleActions: true,
+                                      minTime: DateTime(2018, 3, 5),
+                                      maxTime: DateTime(2025, 6, 7),
+                                      onChanged: (date) {
+                                    setState(() {
+                                      var formatter =
+                                          new DateFormat('yyyy-MM-dd');
+                                      currentDateTime = formatter.format(date);
+                                      if (isOnline == true) {
+                                        _getForecastByDate(currentDateTime);
+                                        _getForecast();
+                                        _showToast(
+                                            "Probabilidad de lluvia es $rainProbability %");
+                                      } else {
+                                        _showToast(
+                                            "No hay conexión a internet para obtener las condiciones del tiempo");
+                                      }
+                                    });
+                                  });
+                                },
+                                child: Text('Seleccionar fecha')),
+                            currentDateTime.isEmpty
+                                ? Text(
+                                    'Fecha a reservar: $VALIDATE_TEXT',
+                                  )
+                                : Text('Fecha a reservar: $currentDateTime'),
+                            SizedBox(height: 60),
+                            Center(
+                                child: ElevatedButton(
+                                    onPressed: () async {
+                                      if (_reservationKeyForm.currentState!
+                                              .validate() &&
+                                          currentDateTime.isNotEmpty) {
+                                        var result = await context
+                                            .read<ReservationProvider>()
+                                            .createReservation(
+                                                userNameController.text,
+                                                courtSelected,
+                                                currentDateTime,
+                                                rainProbability.toString());
+                                        if (result.contains('NOT_INSERTED')) {
+                                          _showDialog(
+                                              "Información",
+                                              "La $courtSelected ya ha sido reservada 3 veces este dia",
+                                              "Seleccionar otra fecha",
+                                              context);
+                                        } else {
+                                          Navigator.pop(context, true);
+                                        }
+                                      }
+                                    },
+                                    child: Text('Reservar'))),
+                          ],
+                        )),
+                  )
+                ],
               ),
             ),
           );
