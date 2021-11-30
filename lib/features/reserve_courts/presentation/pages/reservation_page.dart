@@ -25,7 +25,6 @@ class _ReservationPageState extends State<ReservationPage> {
   num rainProbability = 0;
   List<String> options = [];
   List<ForecastWeatherModel> forecastList = [];
-  String result = "";
   TextEditingController userNameController = TextEditingController();
   final WeatherCloudDataSourceImpl weatherCloudDataSourceImpl =
       WeatherCloudDataSourceImpl();
