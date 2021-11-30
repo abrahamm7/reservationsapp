@@ -3,7 +3,7 @@ import 'package:reservationsapp/features/reserve_courts/data/datasources/reserva
 import 'package:reservationsapp/features/reserve_courts/data/models/reservation_model.dart';
 import 'package:lottie/lottie.dart';
 import 'package:reservationsapp/features/reserve_courts/presentation/pages/reservation_page.dart';
-import 'package:reservationsapp/features/reserve_courts/presentation/widgets/cardreservation.dart';
+import 'package:reservationsapp/features/reserve_courts/presentation/components/cardreservation.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({Key? key}) : super(key: key);
