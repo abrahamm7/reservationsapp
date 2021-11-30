@@ -53,6 +53,39 @@ class _ReservationPageState extends State<ReservationPage> {
     isOnline = await CheckInternetConnection.check().then((value) => value);
   }
 
+  void _showDialog(String title, String description, String option,
+      BuildContext context) async {
+    Alert(
+      context: context,
+      type: AlertType.info,
+      title: title,
+      desc: description,
+      buttons: [
+        DialogButton(
+          child: Text(
+            option,
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          color: Colors.red,
+        ),
+      ],
+    ).show();
+  }
+
+  void _showToast(String desc) {
+    Fluttertoast.showToast(
+        msg: desc,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -121,25 +154,11 @@ class _ReservationPageState extends State<ReservationPage> {
                                   if (isOnline == true) {
                                     _getForecastByDate(currentDateTime);
                                     _getForecast();
-                                    Fluttertoast.showToast(
-                                        msg:
-                                            "Probabilidad de lluvia es $rainProbability",
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.BOTTOM,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.red,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
+                                    _showToast(
+                                        "Probabilidad de lluvia es $rainProbability");
                                   } else {
-                                    Fluttertoast.showToast(
-                                        msg:
-                                            "No hay conexión a internet para obtener las condiciones del tiempo",
-                                        toastLength: Toast.LENGTH_SHORT,
-                                        gravity: ToastGravity.BOTTOM,
-                                        timeInSecForIosWeb: 1,
-                                        backgroundColor: Colors.red,
-                                        textColor: Colors.white,
-                                        fontSize: 16.0);
+                                    _showToast(
+                                        "No hay conexión a internet para obtener las condiciones del tiempo");
                                   }
                                 });
                               });
@@ -164,27 +183,11 @@ class _ReservationPageState extends State<ReservationPage> {
                                             currentDateTime,
                                             rainProbability.toString());
                                     if (result.contains('NOT_INSERTED')) {
-                                      Alert(
-                                        context: context,
-                                        type: AlertType.info,
-                                        title: "Información",
-                                        desc:
-                                            "La $courtSelected ya ha sido reservada 3 veces este dia",
-                                        buttons: [
-                                          DialogButton(
-                                            child: Text(
-                                              "Seleccionar otra fecha",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 20),
-                                            ),
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            color: Colors.red,
-                                          ),
-                                        ],
-                                      ).show();
+                                      _showDialog(
+                                          "Información",
+                                          "La $courtSelected ya ha sido reservada 3 veces este dia",
+                                          "Seleccionar otra fecha",
+                                          context);
                                     } else {
                                       Navigator.pop(context, true);
                                     }

@@ -32,6 +32,12 @@ class _HomePageState extends State<HomePage> {
     setState(() {});
   }
 
+  Future<List<ReservationModel>> _refreshList() async {
+    listReservations = await reservationLocalDataSourceImpl.getReservations();
+    setState(() {});
+    return listReservations;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,15 +47,20 @@ class _HomePageState extends State<HomePage> {
       body: listReservations.isEmpty
           ? Lottie.asset('assets/lottieJSON/empty-state.json',
               height: 500, width: 500)
-          : ListView(
-              children: <Widget>[
-                for (var item in listReservations)
-                  CardReservation(
-                      id: item.id,
-                      nameCourts: item.nameCourts,
-                      userName: item.userName,
-                      dateReservation: item.dateReservation)
-              ],
+          : RefreshIndicator(
+              onRefresh: _refreshList,
+              child: ListView(
+                physics: BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics()),
+                children: <Widget>[
+                  for (var item in listReservations)
+                    CardReservation(
+                        id: item.id,
+                        nameCourts: item.nameCourts,
+                        userName: item.userName,
+                        dateReservation: item.dateReservation)
+                ],
+              ),
             ),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
