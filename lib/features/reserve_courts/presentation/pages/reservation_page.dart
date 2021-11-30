@@ -19,6 +19,7 @@ class ReservationPage extends StatefulWidget {
 
 class _ReservationPageState extends State<ReservationPage> {
   static const String VALIDATE_TEXT = 'Este campo es obligatorio';
+  static const String NOT_INSERTED = 'NOT_INSERTED';
   var courtSelected;
   var currentDateTime = "";
   var conditionDateTime = "";
@@ -189,7 +190,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                                 courtSelected,
                                                 currentDateTime,
                                                 rainProbability.toString());
-                                        if (result.contains('NOT_INSERTED')) {
+                                        if (result.contains(NOT_INSERTED)) {
                                           _showDialog(
                                               "Información",
                                               "La $courtSelected ya ha sido reservada 3 veces este dia",
