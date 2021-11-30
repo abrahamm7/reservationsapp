@@ -154,7 +154,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                     _getForecastByDate(currentDateTime);
                                     _getForecast();
                                     _showToast(
-                                        "Probabilidad de lluvia es $rainProbability");
+                                        "Probabilidad de lluvia es $rainProbability %");
                                   } else {
                                     _showToast(
                                         "No hay conexión a internet para obtener las condiciones del tiempo");

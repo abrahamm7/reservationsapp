@@ -51,10 +51,12 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   for (var item in listReservations)
                     CardReservation(
-                        id: item.id,
-                        nameCourts: item.nameCourts,
-                        userName: item.userName,
-                        dateReservation: item.dateReservation)
+                      id: item.id,
+                      nameCourts: item.nameCourts,
+                      userName: item.userName,
+                      dateReservation: item.dateReservation,
+                      precipitacionPercent: item.precipitationPercentage,
+                    )
                 ],
               ),
             ),

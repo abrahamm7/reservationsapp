@@ -9,12 +9,14 @@ class CardReservation extends StatefulWidget {
   final String? nameCourts;
   final String? userName;
   final String? dateReservation;
+  final String? precipitacionPercent;
   CardReservation(
       {Key? key,
       required this.id,
       required this.nameCourts,
       required this.userName,
-      required this.dateReservation})
+      required this.dateReservation,
+      required this.precipitacionPercent})
       : super(key: key);
 
   @override
@@ -31,19 +33,26 @@ class _CardReservationState extends State<CardReservation> {
           padding: EdgeInsets.all(5),
           child: GestureDetector(
             child: Card(
-              child: Container(
-                child: Padding(
-                  padding: EdgeInsets.all(15),
-                  child: Column(
-                    children: <Widget>[
-                      Text('Nombre: ${widget.nameCourts}'),
-                      Text('Fecha de reservación: ${widget.dateReservation}'),
-                      Text('Reservada por: ${widget.userName}'),
-                    ],
+                elevation: 10,
+                child: InkWell(
+                  splashColor: Colors.red,
+                  onTap: () {},
+                  child: Container(
+                    child: Padding(
+                      padding: EdgeInsets.all(15),
+                      child: Column(
+                        children: <Widget>[
+                          Text('Nombre: ${widget.nameCourts}'),
+                          Text(
+                              'Fecha de reservación: ${widget.dateReservation}'),
+                          Text('Reservada por: ${widget.userName}'),
+                          Text(
+                              'Porcentaje de lluvia: ${widget.precipitacionPercent} %'),
+                        ],
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
+                )),
             onLongPress: () {
               HapticFeedback.vibrate();
               Alert(
