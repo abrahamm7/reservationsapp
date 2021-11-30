@@ -118,8 +118,8 @@ class _ReservationPageState extends State<ReservationPage> {
                                 setState(() {
                                   var formatter = new DateFormat('yyyy-MM-dd');
                                   currentDateTime = formatter.format(date);
-                                  _getForecastByDate(currentDateTime);
                                   if (isOnline == true) {
+                                    _getForecastByDate(currentDateTime);
                                     _getForecast();
                                     Fluttertoast.showToast(
                                         msg:
@@ -162,7 +162,7 @@ class _ReservationPageState extends State<ReservationPage> {
                                             userNameController.text,
                                             courtSelected,
                                             currentDateTime,
-                                            '2.0');
+                                            rainProbability.toString());
                                     if (result.contains('NOT_INSERTED')) {
                                       Alert(
                                         context: context,

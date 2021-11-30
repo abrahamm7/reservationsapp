@@ -39,10 +39,8 @@ class _HomePageState extends State<HomePage> {
         title: Text('Canchas'),
       ),
       body: listReservations.isEmpty
-          ? Lottie.network(
-              'https://assets7.lottiefiles.com/packages/lf20_GlZGOi.json',
-              height: 500,
-              width: 500)
+          ? Lottie.asset('assets/lottieJSON/empty-state.json',
+              height: 500, width: 500)
           : ListView(
               children: <Widget>[
                 for (var item in listReservations)
