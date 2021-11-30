@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<ReservationModel> listReservations = [];
-  List<dynamic> listWeather = [];
   final ReservationLocalDataSourceImpl reservationLocalDataSourceImpl =
       ReservationLocalDataSourceImpl();
   final WeatherCloudDataSourceImpl weatherCloudDataSourceImpl =
